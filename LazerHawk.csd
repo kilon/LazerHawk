@@ -54,30 +54,30 @@ rslider    bounds(100, 25, 50, 50), trackerinsideradius(0.6), text("PWM"), chann
 rslider    bounds(150, 25, 50, 50), trackerinsideradius(0.6), text("Phase"), channel("SG2 Phase"), range(0.01, 0.99, .01, 1, 0.001), textcolour(0,0,0)
 
 label      bounds(0, 100, 190, 20), text("Amp Envelope"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-rslider    bounds(0, 125, 50, 50), trackerinsideradius(0.6), text("A"), channel("SG2 Env Amp A"), range(0.001, 12, .01, 1, 0.001), textcolour(0,0,0)
-rslider    bounds(50, 125, 50, 50), trackerinsideradius(0.6), text("D"), channel("SG2 Env Amp D"), range(0.02, 12, 2, 1, 0.001), textcolour(0,0,0)
-rslider    bounds(100, 125, 50, 50), trackerinsideradius(0.6), text("S"), channel("SG2 Env Amp S"), range(0.02, .99, 0, 1, 0.001), textcolour(0,0,0)
-rslider    bounds(150, 125, 50, 50), trackerinsideradius(0.6), text("R"), channel("SG2 Env Amp R"), range(0.02, 12, .01, 1, 0.001), textcolour(0,0,0)
+rslider    bounds(0, 125, 50, 50), trackerinsideradius(0.6), text("A"), channel("SG2 Env Amp A"), range(0.001, 12, .01, 1, 1), textcolour(0,0,0)
+rslider    bounds(50, 125, 50, 50), trackerinsideradius(0.6), text("D"), channel("SG2 Env Amp D"), range(0.02, 12, 2, 1, 1), textcolour(0,0,0)
+rslider    bounds(100, 125, 50, 50), trackerinsideradius(0.6), text("S"), channel("SG2 Env Amp S"), range(0.02, .99, .99, 1, 1), textcolour(0,0,0)
+rslider    bounds(150, 125, 50, 50), trackerinsideradius(0.6), text("R"), channel("SG2 Env Amp R"), range(0.02, 12, .01, 1, 1), textcolour(0,0,0)
 
 label      bounds(310, 5, 90, 20), text("Filter LP"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-rslider    bounds(300, 25, 50, 50), trackerinsideradius(0.6), text("Freq"), channel("SG2 Low Pass Frequency"), range(100, 16000, 16000, 1, 0.001), textcolour(0,0,0)
-rslider    bounds(350, 25, 50, 50), trackerinsideradius(0.6), text("Reas"), channel("SG2 Low Pass Reasonance"), range(0.1, 2, 0, 1, 0.001), textcolour(0,0,0)
+rslider    bounds(300, 25, 50, 50), trackerinsideradius(0.6), text("Freq"), channel("SG2 Low Pass Frequency"), range(1, 8000, 8000, 1, 1), textcolour(0,0,0)
+rslider    bounds(350, 25, 50, 50), trackerinsideradius(0.6), text("Reas"), channel("SG2 Low Pass Reasonance"), range(1, 99, 1, 1, 1), textcolour(0,0,0)
 
 label      bounds(210, 5, 90, 20), text("Filter HP"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-rslider    bounds(200, 25, 50, 50), trackerinsideradius(0.6), text("Freq"), channel("SG2 High Pass Frequency"), range(100, 16000, 100, 1, 0.001), textcolour(0,0,0)
-rslider    bounds(250, 25, 50, 50), trackerinsideradius(0.6), text("Reas"), channel("SG2 High Pass Reasonance"), range(1, 200, 1, 1, 0.001), textcolour(0,0,0)
+rslider    bounds(200, 25, 50, 50), trackerinsideradius(0.6), text("Freq"), channel("SG2 High Pass Frequency"), range(1, 8000, 1, 1, 1), textcolour(0,0,0)
+rslider    bounds(250, 25, 50, 50), trackerinsideradius(0.6), text("Reas"), channel("SG2 High Pass Reasonance"), range(1, 99, 1, 1, 1), textcolour(0,0,0)
 
 label      bounds(200, 100, 190, 20), text("Filter Envelope"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-rslider    bounds(200, 125, 50, 50), trackerinsideradius(0.6), text("A"), channel("SG2 Env Filters A"), range(0.001, 12, .01, 1, 0.001), textcolour(0,0,0)
-rslider    bounds(250, 125, 50, 50), trackerinsideradius(0.6), text("D"), channel("SG2 Env Filters D"), range(0.02, 12, 2, 1, 0.001), textcolour(0,0,0)
-rslider    bounds(300, 125, 50, 50), trackerinsideradius(0.6), text("S"), channel("SG2 Env Filters S"), range(0.02, .99, 0, 1, 0.001), textcolour(0,0,0)
-rslider    bounds(350, 125, 50, 50), trackerinsideradius(0.6), text("R"), channel("SG2 Env Filters R"), range(0.02, 12, .01, 1, 0.001), textcolour(0,0,0)
+rslider    bounds(200, 125, 50, 50), trackerinsideradius(0.6), text("A"), channel("SG2 Env Filters A"), range(0.001, 12, .01, 1, 1), textcolour(0,0,0)
+rslider    bounds(250, 125, 50, 50), trackerinsideradius(0.6), text("D"), channel("SG2 Env Filters D"), range(0.02, 12, 2, 1, 1), textcolour(0,0,0)
+rslider    bounds(300, 125, 50, 50), trackerinsideradius(0.6), text("S"), channel("SG2 Env Filters S"), range(0.02, .99, .99, 1, 1), textcolour(0,0,0)
+rslider    bounds(350, 125, 50, 50), trackerinsideradius(0.6), text("R"), channel("SG2 Env Filters R"), range(0.02, 12, .01, 1, 1), textcolour(0,0,0)
 
 
 } 
 image bounds(0, 500, 800, 200) colour(120, 69, 69, 255){
 label      bounds(0, 0, 190, 20), text("General"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-rslider    bounds(0, 25, 50, 50), trackerinsideradius(0.6), text("SG1"), channel("SG1 Amp"), range(0.0, .5, .3, 1, 0.001), textcolour(0,0,0)
+rslider    bounds(0, 25, 50, 50), trackerinsideradius(0.6), text("Mix"), channel("SGMix"), range(0.0, 1, .5, 1, .01), textcolour(0,0,0)
 rslider    bounds(50, 25, 50, 50), trackerinsideradius(0.6), text("SG2"), channel("SG2 Amp"), range(0.0, .5, 0, 1, 0.001), textcolour(0,0,0)
 }
 </Cabbage>
@@ -87,7 +87,7 @@ rslider    bounds(50, 25, 50, 50), trackerinsideradius(0.6), text("SG2"), channe
 </CsOptions>
 <CsInstruments>
 ; Initialize the global variables.
-ksmps = 32
+ksmps = 100
 nchnls = 2
 0dbfs = 1
 
@@ -153,13 +153,9 @@ instr 1
   aSG1FLp moogladder aSG1,kSG1FilterLpF * kSG1EnvFilter,kSG1FilterLpR
   aSG1FHp bqrez aSG1FLp, kSG1FilterHpF * kSG1EnvFilter, kSG1FilterHpR, 1
   ;outs aSG1Output * 0.1, aSG1Output * 0.1
-  aSG1Output = aSG1FHp
+  aSG1Output balance aSG1FHp, aSG1
   ;aSG1Output = gaSG1Output
-  outs aSG1Output , aSG1Output 
-  chnset aSG1Output, "SG1Output"
-  ;event_i "i",2,0,p3,p4,p5
-  ;event_i "i",3,0,p2,p4,p5
-  ;event_i "i",3,0,0,p4,p5
+  outs aSG1Output, aSG1Output 
 endin
 
 ; SOUND GENERATOR 2
@@ -201,26 +197,27 @@ instr 2
   kSG2EnvAmp madsr iSG2EnvAmpAttack, iSG2EnvAmpDecay, iSG2EnvAmpSustain, iSG2EnvAmpRelease
   kSG2EnvFilter madsr iSG2EnvFilterAttack, iSG2EnvFilterDecay, iSG2EnvFilterSustain, iSG2EnvFilterRelease
   aSG2 vco2 p5*kSG2EnvAmp, p4, iSG2wav, kSG2PWM, kSG2Phase
-  aSG2FLp moogladder aSG2,kSG2FilterLpF * kSG2EnvFilter,kSG2FilterLpR
+  aSG2FLp bqrez aSG2,kSG2FilterLpF * kSG2EnvFilter,kSG2FilterLpR, 0
   aSG2FHp bqrez aSG2FLp, kSG2FilterHpF * kSG2EnvFilter, kSG2FilterHpR, 1
-  aSG2Out = aSG2FHp
-  outs aSG2Out , aSG2Out 
+  ;aSG2Out = aSG2FHp
+  aSG2Out balance aSG2FHp, aSG2
+  outs aSG2Out, aSG2Out
   
 endin
 massign 1,3
 instr 3
   ; General
   kSG1Amp chnget "SG1 Amp"
-  kSG2Amp chnget "SG2 Amp" 
-
+  kMix chnget "SGMix" 
+  ;printk 1,kMix
   ; Get input from Layer 1 and 2 
   aSG1Out subinstr 1,p4,p5
   aSG2Out subinstr 2,p4,p5
   
   ; display kSG1Amp, .1, 3
-  outs (aSG1Out * kSG1Amp) + (aSG2Out * kSG2Amp) ,(aSG1Out * kSG1Amp) + (aSG2Out * kSG2Amp)
   
- 
+  outs (aSG1Out * (1.0 - kMix)) + (aSG2Out * kMix), (aSG1Out * (1.0-kMix)) + (aSG2Out * kMix)
+  ;outs aSG2Out, aSG2Out
  
 endin
 
