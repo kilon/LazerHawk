@@ -90,7 +90,7 @@ rslider    bounds(550, 125, 50, 50), trackerinsideradius(0.6), text("R"), channe
 image bounds(0, 500, 800, 200) colour(120, 69, 69, 255),plant("Master"){
 label      bounds(0, 0, 190, 20), text("General"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
 rslider    bounds(0, 25, 50, 50), trackerinsideradius(0.6), text("Mix"), channel("SGMix"), range(0.0, 1, .5, 1, .01), textcolour(0,0,0)
-rslider    bounds(50, 25, 50, 50), trackerinsideradius(0.6), text("SG2"), channel("SG2 Amp"), range(0.0, .5, 0, 1, 0.001), textcolour(0,0,0)
+;rslider    bounds(50, 25, 50, 50), trackerinsideradius(0.6), text("SG2"), channel("SG2 Amp"), range(0.0, .5, 0, 1, 0.001), textcolour(0,0,0)
 
 label      bounds(200, 0, 190, 20), text("Chorus"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
 ;rslider    bounds(0, 25, 50, 50), trackerinsideradius(0.6), text("Mix"), channel("SGMix"), range(0.0, 1, .5, 1, .01), textcolour(0,0,0)
