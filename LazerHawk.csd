@@ -46,7 +46,7 @@ rslider    bounds(550, 125, 50, 50), trackerinsideradius(0.6), text("R"), channe
 
 
 } 
-image bounds(0, 298, 800, 197) colour(108, 63, 91, 255){
+image bounds(0, 298, 800, 197) colour(108, 63, 91, 255), plant("layer2"){
 
 label      bounds(0, 5, 200, 20), text("Sound Generator 2"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
 combobox   bounds(0, 25, 100, 25),items("sine" , "saw", "square", "triangle"), channel("SG2 Wav"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
@@ -54,31 +54,56 @@ rslider    bounds(100, 25, 50, 50), trackerinsideradius(0.6), text("PWM"), chann
 rslider    bounds(150, 25, 50, 50), trackerinsideradius(0.6), text("Phase"), channel("SG2 Phase"), range(0.01, 0.99, .01, 1, 0.001), textcolour(0,0,0)
 
 label      bounds(0, 100, 190, 20), text("Amp Envelope"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-rslider    bounds(0, 125, 50, 50), trackerinsideradius(0.6), text("A"), channel("SG2 Env Amp A"), range(0.001, 12, .01, 1, 1), textcolour(0,0,0)
-rslider    bounds(50, 125, 50, 50), trackerinsideradius(0.6), text("D"), channel("SG2 Env Amp D"), range(0.02, 12, 2, 1, 1), textcolour(0,0,0)
-rslider    bounds(100, 125, 50, 50), trackerinsideradius(0.6), text("S"), channel("SG2 Env Amp S"), range(0.02, .99, .99, 1, 1), textcolour(0,0,0)
-rslider    bounds(150, 125, 50, 50), trackerinsideradius(0.6), text("R"), channel("SG2 Env Amp R"), range(0.02, 12, .01, 1, 1), textcolour(0,0,0)
+rslider    bounds(0, 125, 50, 50), trackerinsideradius(0.6), text("A"), channel("SG2 Env Amp A"), range(0.001, 12, .01, 1, 0.001), textcolour(0,0,0)
+rslider    bounds(50, 125, 50, 50), trackerinsideradius(0.6), text("D"), channel("SG2 Env Amp D"), range(0.02, 12, 2, 1, 0.001), textcolour(0,0,0)
+rslider    bounds(100, 125, 50, 50), trackerinsideradius(0.6), text("S"), channel("SG2 Env Amp S"), range(0.02, .99, .99, 1, 0.001), textcolour(0,0,0)
+rslider    bounds(150, 125, 50, 50), trackerinsideradius(0.6), text("R"), channel("SG2 Env Amp R"), range(0.02, 12, .01, 1, 0.001), textcolour(0,0,0)
 
-label      bounds(310, 5, 90, 20), text("Filter LP"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-rslider    bounds(300, 25, 50, 50), trackerinsideradius(0.6), text("Freq"), channel("SG2 Low Pass Frequency"), range(1, 8000, 8000, 1, 1), textcolour(0,0,0)
-rslider    bounds(350, 25, 50, 50), trackerinsideradius(0.6), text("Reas"), channel("SG2 Low Pass Reasonance"), range(1, 99, 1, 1, 1), textcolour(0,0,0)
+label      bounds(210, 5, 190, 20), text("Ring Modulator"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+rslider    bounds(200, 25, 50, 50), trackerinsideradius(0.6), text("Freq"), channel("SG2 RM Frequency"), range(1, 8000, 1, .5, 1), textcolour(0,0,0)
+rslider    bounds(250, 25, 50, 50), trackerinsideradius(0.6), text("Vol"), channel("SG2 RM Volume"), range(0.001, 1, 0.01, 1, 0.001), textcolour(0,0,0)
 
-label      bounds(210, 5, 90, 20), text("Filter HP"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-rslider    bounds(200, 25, 50, 50), trackerinsideradius(0.6), text("Freq"), channel("SG2 High Pass Frequency"), range(1, 8000, 1, 1, 1), textcolour(0,0,0)
-rslider    bounds(250, 25, 50, 50), trackerinsideradius(0.6), text("Reas"), channel("SG2 High Pass Reasonance"), range(1, 99, 1, 1, 1), textcolour(0,0,0)
+label      bounds(200, 100, 190, 20), text("Ring Amp Envelope"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+rslider    bounds(200, 125, 50, 50), trackerinsideradius(0.6), text("A"), channel("SG2 Env RM A"), range(0.001, 12, .01, 1, 0.001), textcolour(0,0,0)
+rslider    bounds(250, 125, 50, 50), trackerinsideradius(0.6), text("D"), channel("SG2 Env RM D"), range(0.02, 12, 2, 1, 0.001), textcolour(0,0,0)
+rslider    bounds(300, 125, 50, 50), trackerinsideradius(0.6), text("S"), channel("SG2 Env RM S"), range(0.02, .99, .99, 1, 0.001), textcolour(0,0,0)
+rslider    bounds(350, 125, 50, 50), trackerinsideradius(0.6), text("R"), channel("SG2 Env RM R"), range(0.02, 12, 12, 1, 0.001), textcolour(0,0,0)
 
-label      bounds(200, 100, 190, 20), text("Filter Envelope"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-rslider    bounds(200, 125, 50, 50), trackerinsideradius(0.6), text("A"), channel("SG2 Env Filters A"), range(0.001, 12, .01, 1, 1), textcolour(0,0,0)
-rslider    bounds(250, 125, 50, 50), trackerinsideradius(0.6), text("D"), channel("SG2 Env Filters D"), range(0.02, 12, 2, 1, 1), textcolour(0,0,0)
-rslider    bounds(300, 125, 50, 50), trackerinsideradius(0.6), text("S"), channel("SG2 Env Filters S"), range(0.02, .99, .99, 1, 1), textcolour(0,0,0)
-rslider    bounds(350, 125, 50, 50), trackerinsideradius(0.6), text("R"), channel("SG2 Env Filters R"), range(0.02, 12, .01, 1, 1), textcolour(0,0,0)
 
+
+label      bounds(410, 5, 90, 20), text("Filter HP"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+rslider    bounds(400, 25, 50, 50), trackerinsideradius(0.6), text("Freq"), channel("SG2 High Pass Frequency"), range(100, 16000, 100, 1, 0.001), textcolour(0,0,0)
+rslider    bounds(450, 25, 50, 50), trackerinsideradius(0.6), text("Reas"), channel("SG2 High Pass Reasonance"), range(1, 200, 1, 1, 0.001), textcolour(0,0,0)
+
+label      bounds(510, 5, 90, 20), text("Filter LP"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+rslider    bounds(500, 25, 50, 50), trackerinsideradius(0.6), text("Freq"), channel("SG2 Low Pass Frequency"), range(100, 16000, 16000, 1, 0.001), textcolour(0,0,0)
+rslider    bounds(550, 25, 50, 50), trackerinsideradius(0.6), text("Reas"), channel("SG2 Low Pass Reasonance"), range(0.01, 1, 0, 1, 0.001), textcolour(0,0,0)
+
+
+label      bounds(400, 100, 190, 20), text("Filter Envelope"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+rslider    bounds(400, 125, 50, 50), trackerinsideradius(0.6), text("A"), channel("SG2 Env Filters A"), range(0.001, 12, .01, 1, 0.001), textcolour(0,0,0)
+rslider    bounds(450, 125, 50, 50), trackerinsideradius(0.6), text("D"), channel("SG2 Env Filters D"), range(0.02, 12, 2, 1, 0.001), textcolour(0,0,0)
+rslider    bounds(500, 125, 50, 50), trackerinsideradius(0.6), text("S"), channel("SG2 Env Filters S"), range(0.02, .99, .99, 1, 0.001), textcolour(0,0,0)
+rslider    bounds(550, 125, 50, 50), trackerinsideradius(0.6), text("R"), channel("SG2 Env Filters R"), range(0.02, 12, 12, 1, 0.001), textcolour(0,0,0)
 
 } 
-image bounds(0, 500, 800, 200) colour(120, 69, 69, 255){
+image bounds(0, 500, 800, 200) colour(120, 69, 69, 255),plant("Master"){
 label      bounds(0, 0, 190, 20), text("General"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
 rslider    bounds(0, 25, 50, 50), trackerinsideradius(0.6), text("Mix"), channel("SGMix"), range(0.0, 1, .5, 1, .01), textcolour(0,0,0)
 rslider    bounds(50, 25, 50, 50), trackerinsideradius(0.6), text("SG2"), channel("SG2 Amp"), range(0.0, .5, 0, 1, 0.001), textcolour(0,0,0)
+
+label      bounds(200, 0, 190, 20), text("Chorus"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+;rslider    bounds(0, 25, 50, 50), trackerinsideradius(0.6), text("Mix"), channel("SGMix"), range(0.0, 1, .5, 1, .01), textcolour(0,0,0)
+;rslider    bounds(50, 25, 50, 50), trackerinsideradius(0.6), text("SG2"), channel("SG2 Amp"), range(0.0, .5, 0, 1, 0.001), textcolour(0,0,0)
+
+
+label      bounds(400, 0, 190, 20), text("Reverb"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+rslider    bounds(400, 25, 50, 50), trackerinsideradius(0.6), text("Size"), channel("Master Reverb Size"), range(0.0, 1, 0, .5, .01), textcolour(0,0,0)
+rslider    bounds(450, 25, 50, 50), trackerinsideradius(0.6), text("Damp"), channel("Master Reverb Damp"), range(0.0, 1, 0, .5, .01), textcolour(0,0,0)
+rslider    bounds(500, 25, 50, 50), trackerinsideradius(0.6), text("Mix"), channel("Master Reverb Mix"), range(0.0, 1, 0, .5, .01), textcolour(0,0,0)
+rslider    bounds(550, 25, 50, 50), trackerinsideradius(0.6), text("Level"), channel("Master Reverb Level"), range(0.0, 1, 0, .5, .01), textcolour(0,0,0)
+
+
 }
 </Cabbage>
 <CsoundSynthesizer>
@@ -92,7 +117,7 @@ nchnls = 2
 0dbfs = 1
 
 
-;massign 0,2
+;massign 1,1
 ;instrument will be triggered by keyboard widgethk
 ; SOUND GENERATOR 1
 instr 1
@@ -158,6 +183,7 @@ instr 1
   outs aSG1Output, aSG1Output 
 endin
 
+;massign 1,2
 ; SOUND GENERATOR 2
 instr 2
   
@@ -181,6 +207,14 @@ instr 2
   iSG2EnvAmpDecay chnget "SG2 Env Amp D"
   iSG2EnvAmpSustain chnget "SG2 Env Amp S"
   iSG2EnvAmpRelease chnget "SG2 Env Amp R"
+  ; Ring Modulator
+  kSG2RMFrequency chnget "SG2 RM Frequency"
+  kSG2RMVolume chnget "SG2 RM Volume"
+  ; Ring Modulator Envelope
+  iSG2EnvRMAttack chnget "SG2 Env RM A"
+  iSG2EnvRMDecay chnget "SG2 Env RM D"
+  iSG2EnvRMSustain chnget "SG2 Env RM S"
+  iSG2EnvRMRelease chnget "SG2 Env RM R"
   ; Low Pass
   kSG2FilterLpF chnget "SG2 Low Pass Frequency"
   kSG2FilterLpR chnget "SG2 Low Pass Reasonance"
@@ -194,13 +228,27 @@ instr 2
   iSG2EnvFilterRelease chnget "SG2 Env Filters R"
   
   
+  ; generate ring modulator sine
+  aSG2RMsine poscil kSG2RMVolume, kSG2RMFrequency, -1
+  kSG2EnvRM madsr iSG2EnvRMAttack, iSG2EnvRMDecay, iSG2EnvRMSustain, iSG2EnvRMRelease
+  aSG2RM = aSG2RMsine * kSG2EnvRM
+  
+  ; generate main oscilator
   kSG2EnvAmp madsr iSG2EnvAmpAttack, iSG2EnvAmpDecay, iSG2EnvAmpSustain, iSG2EnvAmpRelease
+  aSG2sine vco2 p5*kSG2EnvAmp, p4, iSG2wav, kSG2PWM, kSG2Phase
+  
+  ; apply ring modulation
+  aSG2RMsound = (aSG2RM * aSG2sine)
+  aSG2 = (aSG2sine*(1-kSG2RMVolume))+aSG2RMsound
+  ;outs aSG2, aSG2
+  ;generate LP and HP filters
   kSG2EnvFilter madsr iSG2EnvFilterAttack, iSG2EnvFilterDecay, iSG2EnvFilterSustain, iSG2EnvFilterRelease
-  aSG2 vco2 p5*kSG2EnvAmp, p4, iSG2wav, kSG2PWM, kSG2Phase
-  aSG2FLp bqrez aSG2,kSG2FilterLpF * kSG2EnvFilter,kSG2FilterLpR, 0
-  aSG2FHp bqrez aSG2FLp, kSG2FilterHpF * kSG2EnvFilter, kSG2FilterHpR, 1
-  ;aSG2Out = aSG2FHp
-  aSG2Out balance aSG2FHp, aSG2
+  aSG2FHp bqrez aSG2, kSG2FilterHpF * kSG2EnvFilter, kSG2FilterHpR, 1
+  aSG2FLp bqrez aSG2FHp,kSG2FilterLpF * kSG2EnvFilter,kSG2FilterLpR, 0
+  
+  aSG2Out = aSG2FHp
+  ;outs aSG2FHp, aSG2FHp
+  aSG2Out balance aSG2FHp, aSG2sine
   outs aSG2Out, aSG2Out
   
 endin
@@ -208,7 +256,11 @@ massign 1,3
 instr 3
   ; General
   kSG1Amp chnget "SG1 Amp"
-  kMix chnget "SGMix" 
+  kMix chnget "SGMix"
+  kMasterReverbSize chnget "Master Reverb Size"
+  kMasterReverbDamp chnget "Master Reverb Damp" 
+  kMasterReverbMix chnget "Master Reverb Mix"
+  kMasterReverbLevel chnget "Master Reverb Level"
   ;printk 1,kMix
   ; Get input from Layer 1 and 2 
   aSG1Out subinstr 1,p4,p5
@@ -216,9 +268,20 @@ instr 3
   
   ; display kSG1Amp, .1, 3
   
-  outs (aSG1Out * (1.0 - kMix)) + (aSG2Out * kMix), (aSG1Out * (1.0-kMix)) + (aSG2Out * kMix)
+  aoutL = (aSG1Out * (1.0 - kMix)) + (aSG2Out * kMix)
+  aoutR = (aSG1Out * (1.0 - kMix)) + (aSG2Out * kMix)
   ;outs aSG2Out, aSG2Out
- 
+  aMoutL = aoutL
+  aMOutR = aoutL
+  if (kMasterReverbSize == 0) then
+    aMOutL = aoutL
+    aMOutR = aoutL
+    outs aMOutL, aMOutR
+  else
+  aMOutL, aMOutR freeverb aoutL, aoutR, kMasterReverbSize, kMasterReverbDamp, 48000
+  outs ((aoutL * (1-kMasterReverbMix))+(aMOutL *kMasterReverbMix))*(1.0+kMasterReverbLevel), (aoutR * (1-kMasterReverbMix))+(aMOutR *kMasterReverbMix)*(1.0+kMasterReverbLevel)
+  endif
+    
 endin
 
 
