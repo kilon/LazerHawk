@@ -1,11 +1,11 @@
 <Cabbage>
 #define LAYER1_COLOR colour(61, 106, 73, 255)
-form caption("Lazer Hawk v0.1") size(800, 800), colour(100, 100, 182), pluginid("def1")
-keyboard bounds(0, 700, 800, 100)
+#define LAYER2_COLOR colour(100, 50, 50, 255)
+form caption("LazerHawk") size(800, 700), colour(100, 100, 182), pluginid("LHSYNTH")
+keyboard bounds(0, 600, 800, 100)
 image bounds(2, 0, 800, 60), colour(153, 153, 255, 255) outlinecolour(192, 18, 18, 255),plant("Header"){
 label      bounds(0, 5, 200, 20), text("LazerHawk v0.01"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-combobox bounds(0, 30, 100, 25), channel("combobox"), populate("*.snaps")
-filebutton bounds(116, 30, 60, 25), channel("but1"), text("Save"), mode("snapshot")
+
 }
 image bounds(2, 60, 800, 40), colour(100, 100, 255, 255) outlinecolour(192, 18, 18, 255),plant("Timbres"){
 button bounds(0, 10, 60, 30), value(1), colour:1(0, 155, 0, 255), colour:0(155,0,0,255), channel("Timbre1"),identchannel("ID_Timbre1"), text("timbre 1")
@@ -14,102 +14,119 @@ button bounds(0, 10, 60, 30), value(1), colour:1(0, 155, 0, 255), colour:0(155,0
 
 image bounds(0, 100, 800, 200), $LAYER1_COLOR ,channel("Layer1"), identchannel("ID_Layer1"), plant("layer1plant"){
 
-groupbox bounds(0,0,200,200), $LAYER1_COLOR, text("Sound Generator 1"), fontcolour("black"){
-;label      bounds(0, 5, 200, 20),   text("Sound Generator 1"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+  groupbox bounds(0,0,200,200), $LAYER1_COLOR, text("Sound Generator 1"), fontcolour("black"), identchannel("ID_Sound_Generator_1"){
+    ;label      bounds(0, 5, 200, 20),   text("Sound Generator 1"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
 
-combobox   bounds(2, 25, 100, 25),  items("sine" , "saw", "square", "triangle"), channel("SG1 Wav"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-rslider    bounds(100, 25, 50, 50), text("PWM"),channel("SG1 PWM"), range(0.01, 0.99, .01, 1, 0.001),identchannel("ID_SG1_PWM"), textcolour(0,0,0)
-rslider    bounds(150, 25, 50, 50), text("Phase"), channel("SG1 Phase"), range(0.01, 0.99, .01, 1, 0.001), identchannel("ID_SG1_Phase")textcolour(0,0,0)
-rslider    bounds(150, 70, 50, 50), text("Noise"), channel("SG1 Noise Volume"), range(0.01, 0.99, .01, 1, 0.001), textcolour(0,0,0)
+    combobox   bounds(2, 25, 100, 25),  items("sine" , "saw", "square", "triangle"), channel("SG1_Wav"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    rslider    bounds(100, 25, 50, 50), text("PWM"),channel("SG1_PWM"), range(0.01, 0.99, .01, 1, 0.001),identchannel("ID_SG1_PWM"), textcolour(0,0,0)
+    rslider    bounds(150, 25, 50, 50), text("Phase"), channel("SG1_Phase"), range(0.01, 0.99, .01, 1, 0.001), identchannel("ID_SG1_Phase")textcolour(0,0,0)
+    rslider    bounds(150, 70, 50, 50), text("Noise"), channel("SG1_Noise_Volume"), range(0.001, 0.99, .001, 1, 0.001), textcolour(0,0,0)
 
-groupbox bounds(0,120,200,80), $LAYER1_COLOR, text("Amp Envelop"), fontcolour("black"){
-;label      bounds(0, 120, 190, 20), text("Amp Envelope"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-rslider    bounds(0, 25, 50, 50),  text("A"), channel("SG1 Env Amp A"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
-rslider    bounds(50, 25, 50, 50), text("D"), channel("SG1 Env Amp D"), range(0.02, 3, 2, 1, 0.001), textcolour(0,0,0)
-rslider    bounds(100, 25, 50, 50),text("S"), channel("SG1 Env Amp S"), range(0.02, .99, .99, 1, 0.001), textcolour(0,0,0)
-rslider    bounds(150, 25, 50, 50),text("R"), channel("SG1 Env Amp R"), range(0.1, 3, .01, 1, 0.001), textcolour(0,0,0)
-}
-}
-groupbox bounds(200,0,200,200), $LAYER1_COLOR, text("RM"), fontcolour("black"){
-;label      bounds(210, 5, 190, 20), text("AM"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-rslider    bounds(0, 25, 50, 50), text("Freq"), channel("SG1 RM Frequency"), range(1, 8000, 1, .5, 1), textcolour(0,0,0)
-rslider    bounds(50, 25, 50, 50), text("Vol"), channel("SG1 RM Volume"), range(0.001, 1, 0.01, 1, 0.001), textcolour(0,0,0)
-combobox   bounds(0, 75, 100, 25),items("ring" , "am", "chaos", "frozen"), channel("SG1 AM Type"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-label      bounds(0, 105, 50, 11),text("AM Type"), colour(61, 106, 73, 122), fontcolour(0, 0, 0, 255)
-combobox   bounds(100, 75, 100, 25),items("sine" , "saw", "square", "triangle"), channel("SG1 AM Wav"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-label      bounds(100, 105, 50, 11),text("AM Wav"), colour(61, 106, 73, 122), fontcolour(0, 0, 0, 255)
+    groupbox bounds(2,120,196,80), $LAYER1_COLOR, text("Amp Envelope"), fontcolour("black"){
+    ;label      bounds(0, 120, 190, 20), text("Amp Envelope"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+      rslider    bounds(0, 25, 50, 50),  text("A"), channel("SG1_Env_Amp_A"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
+      rslider    bounds(50, 25, 50, 50), text("D"), channel("SG1_Env_Amp_D"), range(0.02, 3, 2, 1, 0.001), textcolour(0,0,0)
+      rslider    bounds(100, 25, 50, 50),text("S"), channel("SG1_Env_Amp_S"), range(0.02, .99, .99, 1, 0.001), textcolour(0,0,0)
+      rslider    bounds(150, 25, 50, 50),text("R"), channel("SG1_Env_Amp_R"), range(0.1, 3, .01, 1, 0.001), textcolour(0,0,0)
+    }
+  }
 
-;label      bounds(0, 120, 190, 20), text("Ring Amp Envelope"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-groupbox bounds(200,145,200,200), $LAYER1_COLOR, text("RM"), fontcolour("black"){
-rslider    bounds(0, 0, 50, 50),  text("A"), channel("SG1 Env RM A"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
-rslider    bounds(50, 0, 50, 50),  text("D"), channel("SG1 Env RM D"), range(0.02, 3, 2, 1, 0.001), textcolour(0,0,0)
-rslider    bounds(100, 0, 50, 50),  text("S"), channel("SG1 Env RM S"), range(0.02, .99, .99, 1, 0.001), textcolour(0,0,0)
-rslider    bounds(150, 0, 50, 50),  text("R"), channel("SG1 Env RM R"), range(0.02, 3, 12, 1, 0.001), textcolour(0,0,0)
-}}
+  groupbox bounds(200,0,200,200), $LAYER1_COLOR, text("RM"), fontcolour("black"){
+    ;label      bounds(210, 5, 190, 20), text("AM"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    rslider    bounds(0, 25, 50, 50), text("Freq"), channel("SG1_RM_Frequency"), range(1, 8000, 1, .5, 1), textcolour(0,0,0)
+    rslider    bounds(50, 25, 50, 50), text("Vol"), channel("SG1_RM_Volume"), range(0.001, 1, 0.01, 1, 0.001), textcolour(0,0,0)
 
+    combobox   bounds(4, 75, 96, 25),items("ring" , "am", "chaos", "frozen"), channel("SG1_AM_Type"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    label      bounds(4, 105, 50, 11),text("AM Type"), $LAYER1_COLOR, fontcolour(0, 0, 0, 255)
+    combobox   bounds(100, 75, 98, 25),items("sine" , "saw", "square", "triangle"), channel("SG1_AM_Wav"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    label      bounds(100, 105, 50, 11),text("AM Wav"), $LAYER1_COLOR, fontcolour(0, 0, 0, 255)
 
-label      bounds(410, 5, 90, 20),  text("Filter HP"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-rslider    bounds(400, 25, 50, 50), text("Freq"), channel("SG1 High Pass Frequency"), range(100, 16000, 100, 1, 0.001), textcolour(0,0,0)
-rslider    bounds(450, 25, 50, 50), text("Reas"), channel("SG1 High Pass Reasonance"), range(1, 200, 1, 1, 0.001), textcolour(0,0,0)
+    ;label      bounds(0, 120, 190, 20), text("Ring Amp Envelope"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    groupbox bounds(2,120,196,78), $LAYER1_COLOR, text("RM Envelope"), fontcolour("black"){
+      rslider    bounds(0, 30, 50, 50),  text("A"), channel("SG1_Env_RM_A"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
+      rslider    bounds(50, 30, 50, 50),  text("D"), channel("SG1_Env_RM_D"), range(0.02, 3, 2, 1, 0.001), textcolour(0,0,0)
+      rslider    bounds(100, 30, 50, 50),  text("S"), channel("SG1_Env_RM_S"), range(0.02, .99, .99, 1, 0.001), textcolour(0,0,0)
+      rslider    bounds(150, 30, 50, 50),  text("R"), channel("SG1_Env_RM_R"), range(0.02, 3, 12, 1, 0.001), textcolour(0,0,0)
+    }
+  }
 
-label      bounds(510, 5, 90, 20),  text("Filter LP"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-rslider    bounds(500, 25, 50, 50), text("Freq"), channel("SG1 Low Pass Frequency"), range(100, 16000, 16000, 1, 0.001), textcolour(0,0,0)
-rslider    bounds(550, 25, 50, 50), text("Reas"), channel("SG1 Low Pass Reasonance"), range(0.01, 1, 0, 1, 0.001), textcolour(0,0,0)
-
-
-label      bounds(400, 120, 190, 20), text("Filter Envelope"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-rslider    bounds(400, 145, 50, 50),  text("A"), channel("SG1 Env Filters A"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
-rslider    bounds(450, 145, 50, 50),  text("D"), channel("SG1 Env Filters D"), range(0.02, 3, 2, 1, 0.001), textcolour(0,0,0)
-rslider    bounds(500, 145, 50, 50),  text("S"), channel("SG1 Env Filters S"), range(0.02, .99, .99, 1, 0.001), textcolour(0,0,0)
-rslider    bounds(550, 145, 50, 50),  text("R"), channel("SG1 Env Filters R"), range(0.02, 3, 12, 1, 0.001), textcolour(0,0,0)
-
-
+  groupbox bounds(400,0,100,100), $LAYER1_COLOR, text("Filter HP"), fontcolour("black"){
+    ;label      bounds(410, 5, 90, 20),  text("Filter HP"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    rslider    bounds(0, 25, 50, 50), text("Freq"), channel("SG1_High_Pass_Frequency"), range(100, 16000, 100, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(50, 25, 50, 50), text("Reas"), channel("SG1_High_Pass_Reasonance"), range(1, 200, 1, 1, 0.001), textcolour(0,0,0)
+  }
+  groupbox bounds(500,0,100,100), $LAYER1_COLOR, text("Filter LP"), fontcolour("black"){
+    ;label      bounds(0, 5, 90, 20),  text("Filter LP"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    rslider    bounds(0, 25, 50, 50), text("Freq"), channel("SG1_Low_Pass_Frequency"), range(100, 16000, 16000, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(50, 25, 50, 50), text("Reas"), channel("SG1_Low_Pass_Reasonance"), range(0.01, 1, 0, 1, 0.001), textcolour(0,0,0)
+  }
+  groupbox bounds(400,100,200,100), $LAYER1_COLOR, text("Filter Envelope"), fontcolour("black"){
+    ;label      bounds(400, 120, 190, 20), text("Filter Envelope"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    rslider    bounds(0, 30, 50, 50),  text("A"), channel("SG1_Env_Filters_A"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(50, 30, 50, 50),  text("D"), channel("SG1_Env_Filters_D"), range(0.02, 3, 2, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(100, 30, 50, 50),  text("S"), channel("SG1_Env_Filters_S"), range(0.02, .99, .99, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(150, 30, 50, 50),  text("R"), channel("SG1_Env_Filters_R"), range(0.02, 3, 12, 1, 0.001), textcolour(0,0,0)
+  }
+  
 } 
-image bounds(0, 301, 800, 199) colour(108, 63, 91, 255), plant("layer2"){
+image bounds(0, 300, 800, 200), $LAYER2_COLOR ,channel("Layer2"), identchannel("ID_Layer2"), plant("layer2plant"){
 
-label      bounds(0, 5, 200, 20), text("Sound Generator 2"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-combobox   bounds(0, 25, 100, 25),items("sine" , "saw", "square", "triangle"), channel("SG2 Wav"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-rslider    bounds(100, 25, 50, 50),  text("PWM"), channel("SG2 PWM"), range(0.01, 0.99, .01, 1, 0.001), textcolour(0,0,0)
-rslider    bounds(150, 25, 50, 50),  text("Phase"), channel("SG2 Phase"), range(0.01, 0.99, .01, 1, 0.001), textcolour(0,0,0)
+  groupbox bounds(0,0,200,200), $LAYER2_COLOR, text("Sound Generator 2"), fontcolour("black"){
+    ;label      bounds(0, 5, 200, 20),   text("Sound Generator 1"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
 
-label      bounds(0, 120, 190, 20),  text("Amp Envelope"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-rslider    bounds(0, 145, 50, 50),   text("A"), channel("SG2 Env Amp A"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
-rslider    bounds(50, 145, 50, 50),  text("D"), channel("SG2 Env Amp D"), range(0.02, 3, 2, 1, 0.001), textcolour(0,0,0)
-rslider    bounds(100, 145, 50, 50), text("S"), channel("SG2 Env Amp S"), range(0.02, .99, .99, 1, 0.001), textcolour(0,0,0)
-rslider    bounds(150, 145, 50, 50), text("R"), channel("SG2 Env Amp R"), range(0.1, 3, .1, 1, 0.001), textcolour(0,0,0)
+    combobox   bounds(2, 25, 100, 25),  items("sine" , "saw", "square", "triangle"), channel("SG2_Wav"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    rslider    bounds(100, 25, 50, 50), text("PWM"),channel("SG2_PWM"), range(0.01, 0.99, .01, 1, 0.001),identchannel("ID_SG2_PWM"), textcolour(0,0,0)
+    rslider    bounds(150, 25, 50, 50), text("Phase"), channel("SG2_Phase"), range(0.01, 0.99, .01, 1, 0.001), identchannel("ID_SG2_Phase")textcolour(0,0,0)
+    rslider    bounds(150, 70, 50, 50), text("Noise"), channel("SG2_Noise_Volume"), range(0.01, 0.99, .01, 1, 0.001), textcolour(0,0,0)
 
-label      bounds(210, 5, 190, 20), text("Ring Modulator"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-rslider    bounds(200, 25, 50, 50), text("Freq"), channel("SG2 RM Frequency"), range(1, 8000, 1, .5, 1), textcolour(0,0,0)
-rslider    bounds(250, 25, 50, 50), text("Vol"), channel("SG2 RM Volume"), range(0.001, 1, 0.001, 1, 0.001), textcolour(0,0,0)
-combobox   bounds(200, 75, 100, 25),items("ring" , "am", "chaos", "frozen"), channel("SG2 AM Type"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-label      bounds(200, 105, 50, 11), text("AM Type"), colour(108, 63, 91, 122), fontcolour(0, 0, 0, 255)
-combobox   bounds(300, 75, 100, 25),items("sine" , "saw", "square", "triangle"), channel("SG2 AM Wav"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-label      bounds(300, 105, 50, 11), text("AM Wav"), colour(108, 63, 91, 122), fontcolour(0, 0, 0, 255)
+    groupbox bounds(2,120,196,80), $LAYER2_COLOR, text("Amp Envelope"), fontcolour("black"){
+    ;label      bounds(0, 120, 190, 20), text("Amp Envelope"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+      rslider    bounds(0, 25, 50, 50),  text("A"), channel("SG2_Env_Amp_A"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
+      rslider    bounds(50, 25, 50, 50), text("D"), channel("SG2_Env_Amp_D"), range(0.02, 3, 2, 1, 0.001), textcolour(0,0,0)
+      rslider    bounds(100, 25, 50, 50),text("S"), channel("SG2_Env_Amp_S"), range(0.02, .99, .99, 1, 0.001), textcolour(0,0,0)
+      rslider    bounds(150, 25, 50, 50),text("R"), channel("SG2_Env_Amp_R"), range(0.1, 3, .01, 1, 0.001), textcolour(0,0,0)
+    }
+  }
 
-label      bounds(200, 120, 190, 20), text("Ring Amp Envelope"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-rslider    bounds(200, 145, 50, 50),  text("A"), channel("SG2 Env RM A"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
-rslider    bounds(250, 145, 50, 50),  text("D"), channel("SG2 Env RM D"), range(0.02, 3, 2, 1, 0.001), textcolour(0,0,0)
-rslider    bounds(300, 145, 50, 50),  text("S"), channel("SG2 Env RM S"), range(0.02, .99, .99, 1, 0.001), textcolour(0,0,0)
-rslider    bounds(350, 145, 50, 50),  text("R"), channel("SG2 Env RM R"), range(0.1, 3, 12, 1, 0.001), textcolour(0,0,0)
+  groupbox bounds(200,0,200,200), $LAYER2_COLOR, text("RM"), fontcolour("black"){
+    ;label      bounds(210, 5, 190, 20), text("AM"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    rslider    bounds(0, 25, 50, 50), text("Freq"), channel("SG2_RM_Frequency"), range(1, 8000, 1, .5, 1), textcolour(0,0,0)
+    rslider    bounds(50, 25, 50, 50), text("Vol"), channel("SG2_RM_Volume"), range(0.001, 1, 0.01, 1, 0.001), textcolour(0,0,0)
 
+    combobox   bounds(4, 75, 96, 25),items("ring" , "am", "chaos", "frozen"), channel("SG2_AM_Type"),$LAYER2_COLOR, fontcolour(0, 0, 0, 255)
+    label      bounds(4, 105, 50, 11),text("AM Type"), $LAYER2_COLOR, fontcolour(0, 0, 0, 255)
+    combobox   bounds(100, 75, 98, 25),items("sine" , "saw", "square", "triangle"), channel("SG2_AM_Wav"),$LAYER2_COLOR, fontcolour(0, 0, 0, 255)
+    label      bounds(100, 105, 50, 11),text("AM Wav"), $LAYER2_COLOR, fontcolour(0, 0, 0, 255)
 
+    ;label      bounds(0, 120, 190, 20), text("Ring Amp Envelope"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    groupbox bounds(2,120,196,78), $LAYER2_COLOR, text("RM_Envelope"), fontcolour("black"){
+      rslider    bounds(0, 30, 50, 50),  text("A"), channel("SG2_Env_RM_A"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
+      rslider    bounds(50, 30, 50, 50),  text("D"), channel("SG2_Env_RM_D"), range(0.02, 3, 2, 1, 0.001), textcolour(0,0,0)
+      rslider    bounds(100, 30, 50, 50),  text("S"), channel("SG2_Env_RM_S"), range(0.02, .99, .99, 1, 0.001), textcolour(0,0,0)
+      rslider    bounds(150, 30, 50, 50),  text("R"), channel("SG2_Env_RM_R"), range(0.02, 3, 12, 1, 0.001), textcolour(0,0,0)
+    }
+  }
 
-label      bounds(410, 5, 90, 20), text("Filter HP"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-rslider    bounds(400, 25, 50, 50), text("Freq"), channel("SG2 High Pass Frequency"), range(100, 16000, 100, 1, 1), textcolour(0,0,0)
-rslider    bounds(450, 25, 50, 50), text("Reas"), channel("SG2 High Pass Reasonance"), range(1, 200, 1, 1, 0.001), textcolour(0,0,0)
+  groupbox bounds(400,0,100,100), $LAYER2_COLOR, text("Filter HP"), fontcolour("black"){
+    ;label      bounds(410, 5, 90, 20),  text("Filter HP"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    rslider    bounds(0, 25, 50, 50), text("Freq"), channel("SG2_High_Pass_Frequency"), range(100, 16000, 100, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(50, 25, 50, 50), text("Reas"), channel("SG2_High_Pass_Reasonance"), range(1, 200, 1, 1, 0.001), textcolour(0,0,0)
+  }
+  groupbox bounds(500,0,100,100), $LAYER2_COLOR, text("Filter LP"), fontcolour("black"){
+    ;label      bounds(0, 5, 90, 20),  text("Filter LP"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    rslider    bounds(0, 25, 50, 50), text("Freq"), channel("SG2_Low_Pass_Frequency"), range(100, 16000, 16000, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(50, 25, 50, 50), text("Reas"), channel("SG2_Low_Pass_Reasonance"), range(0.01, 1, 0, 1, 0.001), textcolour(0,0,0)
+  }
+  groupbox bounds(400,100,200,100), $LAYER2_COLOR, text("Filter Envelope"), fontcolour("black"){
+    ;label      bounds(400, 120, 190, 20), text("Filter Envelope"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    rslider    bounds(0, 30, 50, 50),  text("A"), channel("SG2_Env_Filters_A"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(50, 30, 50, 50),  text("D"), channel("SG2_Env_Filters_D"), range(0.02, 3, 2, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(100, 30, 50, 50),  text("S"), channel("SG2_Env_Filters_S"), range(0.02, .99, .99, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(150, 30, 50, 50),  text("R"), channel("SG2_Env_Filters_R"), range(0.02, 3, 12, 1, 0.001), textcolour(0,0,0)
+  }
 
-label      bounds(510, 5, 90, 20),  text("Filter LP"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-rslider    bounds(500, 25, 50, 50), text("Freq"), channel("SG2 Low Pass Frequency"), range(100, 16000, 16000, 1, 1), textcolour(0,0,0)
-rslider    bounds(550, 25, 50, 50), text("Reas"), channel("SG2 Low Pass Reasonance"), range(1, 200, 0, 1, 1), textcolour(0,0,0)
+}
 
-
-label      bounds(400, 120, 190, 20), text("Filter Envelope"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-rslider    bounds(400, 145, 50, 50),  text("A"), channel("SG2 Env Filters A"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
-rslider    bounds(450, 145, 50, 50),  text("D"), channel("SG2 Env Filters D"), range(0.02, 3, 2, 1, 0.001), textcolour(0,0,0)
-rslider    bounds(500, 145, 50, 50),  text("S"), channel("SG2 Env Filters S"), range(0.02, .99, .99, 1, 0.001), textcolour(0,0,0)
-rslider    bounds(550, 145, 50, 50),  text("R"), channel("SG2 Env Filters R"), range(0.02, 3, 12, 1, 0.001), textcolour(0,0,0)
-
-} 
 image bounds(0, 500, 800, 100) colour(120, 69, 69, 255),plant("Master"){
 label      bounds(0, 0, 190, 20), text("General"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
 rslider    bounds(0, 25, 50, 50),  text("Mix"), channel("SGMix"), range(0.0, 1, .5, 1, .01), textcolour(0,0,0)
@@ -121,28 +138,38 @@ label      bounds(200, 0, 190, 20), text("Chorus"), colour(60, 60, 120, 122), fo
 
 
 label      bounds(400, 0, 190, 20), text("Reverb"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-rslider    bounds(400, 25, 50, 50),  text("Size"), channel("Master Reverb Size"), range(0.0, 1, 0, .5, .01), textcolour(0,0,0)
-rslider    bounds(450, 25, 50, 50),  text("Damp"), channel("Master Reverb Damp"), range(0.0, 1, 0, .5, .01), textcolour(0,0,0)
-rslider    bounds(500, 25, 50, 50),  text("Mix"), channel("Master Reverb Mix"), range(0.0, 1, 0, .5, .01), textcolour(0,0,0)
-rslider    bounds(550, 25, 50, 50),  text("Level"), channel("Master Reverb Level"), range(0.0, 1, 0, .5, .01), textcolour(0,0,0)
+rslider    bounds(400, 25, 50, 50),  text("Size"), channel("Master_Reverb_Size"), range(0.0, 1, 0, .5, .01), textcolour(0,0,0)
+rslider    bounds(450, 25, 50, 50),  text("Damp"), channel("Master_Reverb_Damp"), range(0.0, 1, 0, .5, .01), textcolour(0,0,0)
+rslider    bounds(500, 25, 50, 50),  text("Mix"), channel("Master_Reverb_Mix"), range(0.0, 1, 0, .5, .01), textcolour(0,0,0)
+rslider    bounds(550, 25, 50, 50),  text("Level"), channel("Master_Reverb_Level"), range(0.0, 1, 0, .5, .01), textcolour(0,0,0)
 
 
 }
 
-button bounds(20, 104, 150, 14), value(1), colour:1(0, 155, 0, 255), colour:0(155,0,0,255), channel("SG1 on/off"),identchannel("ID_SG1_on_off"), text("Sound Generator 1"), fontcolour:0("black"), fontcolour:1("black")
-;label      bounds(15, 160, 70, 12),   text("Sound Generator 1"), $LAYER1_COLOR, fontcolour(0, 0, 0, 255)
+;gentable bounds(600, 100, 200, 200), tablenumber(1), identchannel("table"), active(1), samplerange(0,4096);, amprange(-0.5,1,-1,0.1) 
+
+combobox bounds(0, 30, 100, 25), populate("*.snaps")
+filebutton bounds(116, 30, 60, 25), text("Save"), populate("*.snaps"), mode("snapshot")
+button bounds(20, 104, 150, 14), value(1), colour:1(0, 155, 0, 255), colour:0(155,0,0,255), channel("SG1_on_off"),identchannel("ID_SG1_on_off"), text("Sound Generator 1"), fontcolour:0("black"), fontcolour:1("black")
+
 </Cabbage>
 <CsoundSynthesizer>
 <CsOptions>
--n -d -+rtmidi=NULL -M1 -m0d --midi-key-cps=4 --midi-velocity-amp=5
+-n -d -+rtmidi=NULL -M0 -m0d --midi-key-cps=4 --midi-velocity-amp=5 
 </CsOptions>
 <CsInstruments>
 ; Initialize the global variables.
-ksmps = 48
+ksmps = 32
 nchnls = 2
 0dbfs = 1
 
 seed 0
+
+;giWave ftgen 1, 0, 4096, -2,2, 0, 2, 0
+;giSampleTime = 4096
+;giFt   ftgen 1, 0, giSampleTime, 2, 0
+giWave ftgen 1, 0, 4096, 10, 1, 1, 1, 1 
+
 ; =======================
 ; ||     OPCODES       ||
 ; =======================
@@ -154,15 +181,15 @@ seed 0
 ; =======================
 
 ;cpuprc 1,99
-maxalloc 1,128
+;maxalloc 1,128
 instr 1
-
+  
 ; -----------------------
 ; | variable definition |
 ; -----------------------
 
   ; Waveform
-  iSG1wavStr chnget "SG1 Wav"
+  iSG1wavStr chnget "SG1_Wav"
   if iSG1wavStr == 1 then      ;sine
     chnset "active(0)", "ID_PWM"
     iSG1wav = 0
@@ -178,43 +205,43 @@ instr 1
   endif
   
   ; PWM
-  kSG1PWM chnget "SG1 PWM"
+  kSG1PWM chnget "SG1_PWM"
   
   ; Phase
-  kSG1Phase chnget "SG1 Phase"
+  kSG1Phase chnget "SG1_Phase"
   
   ; noise generator
-  kSG1NoiseVolume chnget "SG1 Noise Volume"
+  kSG1NoiseVolume chnget "SG1_Noise_Volume"
   
   ; Amp Envelope
-  iSG1EnvAmpAttack chnget "SG1 Env Amp A"
-  iSG1EnvAmpDecay chnget "SG1 Env Amp D"
-  iSG1EnvAmpSustain chnget "SG1 Env Amp S"
-  iSG1EnvAmpRelease chnget "SG1 Env Amp R"
+  iSG1EnvAmpAttack chnget "SG1_Env_Amp_A"
+  iSG1EnvAmpDecay chnget "SG1_Env_Amp_D"
+  iSG1EnvAmpSustain chnget "SG1_Env_Amp_S"
+  iSG1EnvAmpRelease chnget "SG1_Env_Amp_R"
   
   ; Ring Modulator
-  kSG1RMFrequency chnget "SG1 RM Frequency"
-  kSG1RMVolume chnget "SG1 RM Volume"
+  kSG1RMFrequency chnget "SG1_RM_Frequency"
+  kSG1RMVolume chnget "SG1_RM_Volume"
   
   ; Ring Modulator Envelope
-  iSG1EnvRMAttack chnget "SG1 Env RM A"
-  iSG1EnvRMDecay chnget "SG1 Env RM D"
-  iSG1EnvRMSustain chnget "SG1 Env RM S"
-  iSG1EnvRMRelease chnget "SG1 Env RM R"
+  iSG1EnvRMAttack chnget "SG1_Env_RM_A"
+  iSG1EnvRMDecay chnget "SG1_Env_RM_D"
+  iSG1EnvRMSustain chnget "SG1_Env_RM_S"
+  iSG1EnvRMRelease chnget "SG1_Env_RM_R"
   
   ; Low Pass
-  kSG1FilterLpF chnget "SG1 Low Pass Frequency"
-  kSG1FilterLpR chnget "SG1 Low Pass Reasonance"
+  kSG1FilterLpF chnget "SG1_Low_Pass_Frequency"
+  kSG1FilterLpR chnget "SG1_Low_Pass_Reasonance"
   
   ; High Pass
-  kSG1FilterHpF chnget "SG1 High Pass Frequency"
-  kSG1FilterHpR chnget "SG1 High Pass Reasonance"
+  kSG1FilterHpF chnget "SG1_High_Pass_Frequency"
+  kSG1FilterHpR chnget "SG1_High_Pass_Reasonance"
   
   ; Filter Envelope
-  iSG1EnvFilterAttack chnget "SG1 Env Filters A"
-  iSG1EnvFilterDecay chnget "SG1 Env Filters D"
-  iSG1EnvFilterSustain chnget "SG1 Env Filters S"
-  iSG1EnvFilterRelease chnget "SG1 Env Filters R"
+  iSG1EnvFilterAttack chnget "SG1_Env_Filters_A"
+  iSG1EnvFilterDecay chnget "SG1_Env_Filters_D"
+  iSG1EnvFilterSustain chnget "SG1_Env_Filters_S"
+  iSG1EnvFilterRelease chnget "SG1_Env_Filters_R"
 
 ; ---------------------------
 ; | end variable definition |
@@ -258,43 +285,43 @@ instr 1
 ; -----------------------
   ;print p5
   ; Waveform
-  iSG2Wav chnget "SG2 Wav"
+  iSG2Wav chnget "SG2_Wav"
  
   ; PWM 
-  kSG2PWM chnget "SG2 PWM"
+  kSG2PWM chnget "SG2_PWM"
   
   ; Phase
-  kSG2Phase chnget "SG2 Phase"
+  kSG2Phase chnget "SG2_Phase"
   
   ; Amp Envelope
-  iSG2EnvAmpAttack chnget "SG2 Env Amp A"
-  iSG2EnvAmpDecay chnget "SG2 Env Amp D"
-  iSG2EnvAmpSustain chnget "SG2 Env Amp S"
-  iSG2EnvAmpRelease chnget "SG2 Env Amp R"
+  iSG2EnvAmpAttack chnget "SG2_Env_Amp_A"
+  iSG2EnvAmpDecay chnget "SG2_Env_Amp_D"
+  iSG2EnvAmpSustain chnget "SG2_Env_Amp_S"
+  iSG2EnvAmpRelease chnget "SG2_Env_Amp_R"
   
   ; Ring Modulator
-  kSG2RMFrequency chnget "SG2 RM Frequency"
-  kSG2RMVolume chnget "SG2 RM Volume"
+  kSG2RMFrequency chnget "SG2_RM_Frequency"
+  kSG2RMVolume chnget "SG2_RM_Volume"
   
   ; Ring Modulator Envelope
-  iSG2EnvRMAttack chnget "SG2 Env RM A"
-  iSG2EnvRMDecay chnget "SG2 Env RM D"
-  iSG2EnvRMSustain chnget "SG2 Env RM S"
-  iSG2EnvRMRelease chnget "SG2 Env RM R"
+  iSG2EnvRMAttack chnget "SG2_Env_RM_A"
+  iSG2EnvRMDecay chnget "SG2_Env_RM_D"
+  iSG2EnvRMSustain chnget "SG2_Env_RM_S"
+  iSG2EnvRMRelease chnget "SG2_Env_RM_R"
   
   ; Low Pass
-  kSG2FilterLpF chnget "SG2 Low Pass Frequency"
-  kSG2FilterLpR chnget "SG2 Low Pass Reasonance"
+  kSG2FilterLpF chnget "SG2_Low_Pass_Frequency"
+  kSG2FilterLpR chnget "SG2_Low_Pass_Reasonance"
   
   ; High Pass
-  kSG2FilterHpF chnget "SG2 High Pass Frequency"
-  kSG2FilterHpR chnget "SG2 High Pass Reasonance"
+  kSG2FilterHpF chnget "SG2_High_Pass_Frequency"
+  kSG2FilterHpR chnget "SG2_High_Pass_Reasonance"
   
   ; Filter Envelope
-  iSG2EnvFilterAttack chnget "SG2 Env Filters A"
-  iSG2EnvFilterDecay chnget "SG2 Env Filters D"
-  iSG2EnvFilterSustain chnget "SG2 Env Filters S"
-  iSG2EnvFilterRelease chnget "SG2 Env Filters R"
+  iSG2EnvFilterAttack chnget "SG2_Env_Filters_A"
+  iSG2EnvFilterDecay chnget "SG2_Env_Filters_D"
+  iSG2EnvFilterSustain chnget "SG2_Env_Filters_S"
+  iSG2EnvFilterRelease chnget "SG2_Env_Filters_R"
   
 ; ---------------------------
 ; | end variable definition |
@@ -350,14 +377,14 @@ instr 1
 ; -----------------------
   
   ; general
-  kSG1Amp chnget "SG1 Amp"
+  kSG1Amp chnget "SG1_Amp"
   kMix chnget "SGMix"
   
   ; reverb
-  kMasterReverbSize chnget "Master Reverb Size"
-  kMasterReverbDamp chnget "Master Reverb Damp" 
-  kMasterReverbMix chnget "Master Reverb Mix"
-  kMasterReverbLevel chnget "Master Reverb Level"
+  kMasterReverbSize chnget "Master_Reverb_Size"
+  kMasterReverbDamp chnget "Master_Reverb_Damp" 
+  kMasterReverbMix chnget "Master_Reverb_Mix"
+  kMasterReverbLevel chnget "Master_Reverb_Level"
  
   
   ; mix knob left : only generator 1 sounds at 100% volume
@@ -382,15 +409,18 @@ instr 1
     aMOutR = aoutL
     outs aMOutL, aMOutR
   else
-    denorm aMOutL
-    denorm aMOutR
+    ;denorm aMOutL
+    ;denorm aMOutR
     aMOutL, aMOutR freeverb aoutL, aoutR, kMasterReverbSize, kMasterReverbDamp, 48000
     aMOutL = aMOutL + aoutL
     aMOutR = aMOutR + aoutR
     ; master output
     outs aMOutL, aMOutR
   endif
+  
  
+  ;chnset	"tablenumber(2)", "table"	; update table display
+  
 endin
 
 instr 2
@@ -400,15 +430,18 @@ instr 2
 endin
 
 instr updateGUI
-
-iSG1wavStr chnget "SG1 Wav"
-iSG1onoff chnget "SG1 on/off"
-if iSG1onoff == 0 then
-  chnset "active(0)", "ID_Layer1"
-  chnset "active(1)", "ID_SG1_on_off"
-else
-  chnset "active(1)", "ID_Layer1"
-endif
+  
+  iSG1wavStr chnget "SG1_Wav"
+  iSG1onoff chnget "SG1_on_off"
+  ;chnset "displaytype('waveform')","wavdisplay"
+  if iSG1onoff == 0 then
+    chnset "active(0)", "ID_Layer1"
+    chnset "active(1)", "ID_SG1_on_off"
+    ;chnset "active(0)", "ID_Sound_Generator_1"
+  else
+    chnset "active(1)", "ID_Layer1"
+    ;chnset "active(1)", "ID_Sound_Generator_1"
+  endif
   if iSG1wavStr == 1 then      ;sine
     chnset "active(0)", "ID_SG1_PWM"
     chnset "active(0)", "ID_SG1_Phase"
@@ -426,8 +459,8 @@ endin
 </CsInstruments>
 <CsScore>
 ;causes Csound to run for about 7000 years...
-f0 z
-
+;f0 z
+i1 0 z
 i2 0 z
 </CsScore>
 </CsoundSynthesizer>
