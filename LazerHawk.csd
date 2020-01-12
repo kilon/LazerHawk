@@ -1,156 +1,303 @@
 <Cabbage>
 #define LAYER1_COLOR colour(61, 106, 73, 255)
+#define LAYER1_COLOR2 colour(60, 80, 50, 255)
+#define LAYER1_COLOR3 colour(80, 80, 50, 255)
+
 #define LAYER2_COLOR colour(100, 50, 50, 255)
-form caption("LazerHawk") size(800, 700), colour(100, 100, 182), pluginid("LHSYNTH")
-keyboard bounds(0, 600, 800, 100)
-image bounds(2, 0, 800, 60), colour(153, 153, 255, 255) outlinecolour(192, 18, 18, 255),plant("Header"){
-label      bounds(0, 5, 200, 20), text("LazerHawk v0.01"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+form caption("LazerHawk") size(800, 800), colour(100, 100, 182), pluginid("LHSYSUB")
+keyboard bounds(0, 700, 800, 100)
+image bounds(2, 0, 800, 50), colour(153, 153, 800, 300) outlinecolour(192, 18, 18, 255),plant("Header"){
+texteditor bounds(2,2,198,20), colour(153,153,153)
+button bounds(202,2, 55, 20), text("Clone")
+combobox bounds(2, 25, 198, 20), populate("*.snaps")
+filebutton bounds(202, 25, 55, 20), text("Save"), populate("*.snaps"), mode("snapshot")
+
+button bounds(270,2, 55, 20), text("Find")
+button bounds(270,25, 55, 20), text("Edit")
+
+button bounds(340,2, 55, 20), text("Pad")
+button bounds(400,2, 55, 20), text("Synth")
+button bounds(460,2, 55, 20), text("Bass")
+button bounds(520,2, 55, 20), text("Brass")
+button bounds(580,2, 55, 20), text("Drum")
+button bounds(640,2, 55, 20), text("String")
+button bounds(700,2, 55, 20), text("Piano")
+
+
+button bounds(340,25, 55, 20), text("Rythmic")
+button bounds(400,25, 55, 20), text("Texture")
+button bounds(460,25, 55, 20), text("Soft")
+button bounds(520,25, 55, 20), text("Metalic")
+button bounds(580,25, 55, 20), text("Melodic")
+button bounds(640,25, 55, 20), text("Accoustic")
+button bounds(700,25, 55, 20), text("Analog")
 
 }
-image bounds(2, 60, 800, 40), colour(100, 100, 255, 255) outlinecolour(192, 18, 18, 255),plant("Timbres"){
-button bounds(0, 10, 60, 30), value(1), colour:1(0, 155, 0, 255), colour:0(155,0,0,255), channel("Timbre1"),identchannel("ID_Timbre1"), text("timbre 1")
-}
+image bounds(0, 50, 800, 200), $LAYER1_COLOR ,channel("Layer1"), identchannel("ID_Layer1"), plant("layer1plant"){
 
-
-image bounds(0, 100, 800, 200), $LAYER1_COLOR ,channel("Layer1"), identchannel("ID_Layer1"), plant("layer1plant"){
-
-  groupbox bounds(0,0,200,200), $LAYER1_COLOR, text("Sound Generator 1"), fontcolour("black"), identchannel("ID_Sound_Generator_1"){
+  groupbox bounds(0,0,300,200), $LAYER1_COLOR, text("Sound Generator 1"), fontcolour("black"), identchannel("ID_Sound_Generator_1"){
     ;label      bounds(0, 5, 200, 20),   text("Sound Generator 1"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
 
-    combobox   bounds(2, 25, 100, 25),  items("sine" , "saw", "square", "triangle"), channel("SG1_Wav"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-    rslider    bounds(100, 25, 50, 50), text("PWM"),channel("SG1_PWM"), range(0.01, 0.99, .01, 1, 0.001),identchannel("ID_SG1_PWM"), textcolour(0,0,0)
-    rslider    bounds(150, 25, 50, 50), text("Phase"), channel("SG1_Phase"), range(0.01, 0.99, .01, 1, 0.001), identchannel("ID_SG1_Phase")textcolour(0,0,0)
-    rslider    bounds(150, 70, 50, 50), text("Noise"), channel("SG1_Noise_Volume"), range(0.001, 0.99, .001, 1, 0.001), textcolour(0,0,0)
-
-    groupbox bounds(2,120,196,80), $LAYER1_COLOR, text("Amp Envelope"), fontcolour("black"){
+    combobox   bounds(2, 2, 90, 20),  items("none" , "saw", "square", "triangle"), channel("SG1_Wav"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+   
+    rslider    bounds(2, 20, 50, 50), text("Noise"), channel("SG1_Noise_Volume"), range(0.001, 0.99, .001, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(50, 20, 50, 50), text("Triangle"), channel("SG1_Triangle_Volume"), range(0.001, 0.99, .001, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(100, 20, 50, 50), text("SF2"), channel("SG1_SF2_Volume"), range(0.001, 0.99, .001, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(100, 70, 50, 50), text("Sub"), channel("SG1_Suboscilator_Volume"), range(0.001, 0.99, .001, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(2, 70, 50, 50),text("Octave"), channel("SG1_Octave"), range(0.1, 3, .01, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(50, 70, 50, 50),text("Fine"), channel("SG1_Fine"), range(0.1, 3, .01, 1, 0.001), textcolour(0,0,0)
+    
+    image bounds(150,22,148,50), $LAYER1_COLOR2 {
+      rslider    bounds(0, 0, 50, 50), text("Square"),channel("SG1_Square_Volume"), range(0.01, 0.99, .01, 1, 0.001),identchannel("ID_SG1_PWM"), textcolour(0,0,0)
+      rslider    bounds(50, 0, 50, 50), text("Phase"), channel("SG1_Square_Phase"), range(0.01, 0.99, .01, 1, 0.001), identchannel("ID_SG1_Phase")textcolour(0,0,0)
+      rslider    bounds(100, 0, 50, 50), text("PWM"),channel("SG1_Square_PWM"), range(0.01, 0.99, .01, 1, 0.001),identchannel("ID_SG1_PWM"), textcolour(0,0,0)
+    }
+    image bounds(150,72,148,50), $LAYER1_COLOR3 {
+      rslider    bounds(0, 0, 50, 50), text("Saw"),channel("SG1_Saw_Volume"), range(0.01, 0.99, .01, 1, 0.001),identchannel("ID_SG1_PWM"), textcolour(0,0,0)
+      rslider    bounds(50, 0, 50, 50), text("Super"),channel("SG1_Saw_Super"), range(0.01, 0.99, .01, 1, 0.001),identchannel("ID_SG1_PWM"), textcolour(0,0,0)
+      rslider    bounds(100, 0, 50, 50), text("Detune"),channel("SG1_Saw_Detune"), range(0.01, 0.99, .01, 1, 0.001),identchannel("ID_SG1_PWM"), textcolour(0,0,0)
+    }
+    
+    
+    groupbox bounds(2,120,194,74), $LAYER1_COLOR, text("Amp Envelope (ENV1)"), fontcolour("black"){
     ;label      bounds(0, 120, 190, 20), text("Amp Envelope"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
       rslider    bounds(0, 25, 50, 50),  text("A"), channel("SG1_Env_Amp_A"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
       rslider    bounds(50, 25, 50, 50), text("D"), channel("SG1_Env_Amp_D"), range(0.02, 3, 2, 1, 0.001), textcolour(0,0,0)
       rslider    bounds(100, 25, 50, 50),text("S"), channel("SG1_Env_Amp_S"), range(0.02, .99, .99, 1, 0.001), textcolour(0,0,0)
-      rslider    bounds(150, 25, 50, 50),text("R"), channel("SG1_Env_Amp_R"), range(0.1, 3, .01, 1, 0.001), textcolour(0,0,0)
+      rslider    bounds(150, 25, 50, 50),text("R"), channel("SG1_Env_Amp_R"), range(0.1, 3, .01, 1, 0.001), textcolour(0,0,0)     
     }
+      rslider    bounds(200, 120, 50, 50),text("LFO1 Rate"), channel("SG1_LFO1_Rate"), range(0.1, 3, .01, 1, 0.001), textcolour(0,0,0)     
+      combobox   bounds(198, 170, 50, 20),  items("Noise" , "Vol", "SF2", "Square", "Phase","PWM","Octave","Fine","Sub","Saw","Super","Detune"), channel("SG1_LFO1_Destination"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+      rslider    bounds(250, 120, 50, 50),text("LFO2 Rate"), channel("SG1_LFO2_Rate"), range(0.1, 3, .01, 1, 0.001), textcolour(0,0,0)     
+      combobox   bounds(248, 170, 50, 20),  items("Noise" , "Vol", "SF2", "Square", "Phase","PWM","Octave","Fine","Sub","Saw","Super","Detune"), channel("SG1_LFO2_Destination"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+
   }
 
-  groupbox bounds(200,0,200,200), $LAYER1_COLOR, text("RM"), fontcolour("black"){
+  groupbox bounds(300,0,200,200), $LAYER1_COLOR, text("RM + FM"), fontcolour("black"){
     ;label      bounds(210, 5, 190, 20), text("AM"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
     rslider    bounds(0, 25, 50, 50), text("Freq"), channel("SG1_RM_Frequency"), range(1, 8000, 1, .5, 1), textcolour(0,0,0)
     rslider    bounds(50, 25, 50, 50), text("Vol"), channel("SG1_RM_Volume"), range(0.001, 1, 0.01, 1, 0.001), textcolour(0,0,0)
 
-    combobox   bounds(4, 75, 96, 25),items("ring" , "am", "chaos", "frozen"), channel("SG1_AM_Type"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-    label      bounds(4, 105, 50, 11),text("AM Type"), $LAYER1_COLOR, fontcolour(0, 0, 0, 255)
-    combobox   bounds(100, 75, 98, 25),items("sine" , "saw", "square", "triangle"), channel("SG1_AM_Wav"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-    label      bounds(100, 105, 50, 11),text("AM Wav"), $LAYER1_COLOR, fontcolour(0, 0, 0, 255)
+    combobox   bounds(4, 70, 50, 20),items("ring" , "am", "chaos", "frozen"), channel("SG1_AM_Type"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    label      bounds(4, 90, 50, 11),text("AM Type"), $LAYER1_COLOR, fontcolour(0, 0, 0, 255)
+    combobox   bounds(50, 70, 50, 20),items("sine" , "saw", "square", "triangle"), channel("SG1_AM_Wav"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    label      bounds(50, 90, 50, 11),text("AM Wav"), $LAYER1_COLOR, fontcolour(0, 0, 0, 255)
+    combobox   bounds(4, 100, 100, 20),items("OP1->OP2->SF2", "OP1->OP2->Square","OP1->OP2->Saw", "OP1->OP2->Sub", "OP1->OP2->All except Sub","OP1->OP2->All"), channel("SG1_FM_Algorithm"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
 
+    rslider    bounds(100, 25, 50, 50), text("OP1"), channel("SG1_FM_OP1_Volume"), range(1, 8000, 1, .5, 1), textcolour(0,0,0)
+    rslider    bounds(100, 75, 50, 50), text("OP1 Freq"), channel("SG1_FM_OP1_Frequency"), range(1, 8000, 1, .5, 1), textcolour(0,0,0)
+    rslider    bounds(150, 25, 50, 50), text("OP2"), channel("SG1_FM_OP2_volume"), range(1, 8000, 1, .5, 1), textcolour(0,0,0)
+    rslider    bounds(150, 75, 50, 50), text("OP2 Freq"), channel("SG1_FM_OP2_Frequency"), range(1, 8000, 1, .5, 1), textcolour(0,0,0)
+    
     ;label      bounds(0, 120, 190, 20), text("Ring Amp Envelope"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-    groupbox bounds(2,120,196,78), $LAYER1_COLOR, text("RM Envelope"), fontcolour("black"){
-      rslider    bounds(0, 30, 50, 50),  text("A"), channel("SG1_Env_RM_A"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
-      rslider    bounds(50, 30, 50, 50),  text("D"), channel("SG1_Env_RM_D"), range(0.02, 3, 2, 1, 0.001), textcolour(0,0,0)
-      rslider    bounds(100, 30, 50, 50),  text("S"), channel("SG1_Env_RM_S"), range(0.02, .99, .99, 1, 0.001), textcolour(0,0,0)
-      rslider    bounds(150, 30, 50, 50),  text("R"), channel("SG1_Env_RM_R"), range(0.02, 3, 12, 1, 0.001), textcolour(0,0,0)
+    groupbox bounds(2,130,195,70), $LAYER1_COLOR, text("RM Envelope (ENV2)"), fontcolour("black"){
+      rslider    bounds(0, 20, 50, 50),  text("A"), channel("SG1_Env_RM_A"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
+      rslider    bounds(50, 20, 50, 50),  text("D"), channel("SG1_Env_RM_D"), range(0.02, 3, 2, 1, 0.001), textcolour(0,0,0)
+      rslider    bounds(100, 20, 50, 50),  text("S"), channel("SG1_Env_RM_S"), range(0.02, .99, .99, 1, 0.001), textcolour(0,0,0)
+      rslider    bounds(150, 20, 50, 50),  text("R"), channel("SG1_Env_RM_R"), range(0.02, 3, 12, 1, 0.001), textcolour(0,0,0)
     }
   }
 
-  groupbox bounds(400,0,100,100), $LAYER1_COLOR, text("Filter HP"), fontcolour("black"){
+  groupbox bounds(500,0,100,75s), $LAYER1_COLOR, text("Filter HP"), fontcolour("black"){
     ;label      bounds(410, 5, 90, 20),  text("Filter HP"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
     rslider    bounds(0, 25, 50, 50), text("Freq"), channel("SG1_High_Pass_Frequency"), range(100, 16000, 100, 1, 0.001), textcolour(0,0,0)
     rslider    bounds(50, 25, 50, 50), text("Reas"), channel("SG1_High_Pass_Reasonance"), range(1, 200, 1, 1, 0.001), textcolour(0,0,0)
   }
-  groupbox bounds(500,0,100,100), $LAYER1_COLOR, text("Filter LP"), fontcolour("black"){
+  groupbox bounds(600,0,100,75), $LAYER1_COLOR, text("Filter LP"), fontcolour("black"){
     ;label      bounds(0, 5, 90, 20),  text("Filter LP"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
     rslider    bounds(0, 25, 50, 50), text("Freq"), channel("SG1_Low_Pass_Frequency"), range(100, 16000, 16000, 1, 0.001), textcolour(0,0,0)
     rslider    bounds(50, 25, 50, 50), text("Reas"), channel("SG1_Low_Pass_Reasonance"), range(0.01, 1, 0, 1, 0.001), textcolour(0,0,0)
   }
-  groupbox bounds(400,100,200,100), $LAYER1_COLOR, text("Filter Envelope"), fontcolour("black"){
+  groupbox bounds(500,75,200,70), $LAYER1_COLOR, text("Filters Envelope (ENV3)"), fontcolour("black"){
     ;label      bounds(400, 120, 190, 20), text("Filter Envelope"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-    rslider    bounds(0, 30, 50, 50),  text("A"), channel("SG1_Env_Filters_A"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
-    rslider    bounds(50, 30, 50, 50),  text("D"), channel("SG1_Env_Filters_D"), range(0.02, 3, 2, 1, 0.001), textcolour(0,0,0)
-    rslider    bounds(100, 30, 50, 50),  text("S"), channel("SG1_Env_Filters_S"), range(0.02, .99, .99, 1, 0.001), textcolour(0,0,0)
-    rslider    bounds(150, 30, 50, 50),  text("R"), channel("SG1_Env_Filters_R"), range(0.02, 3, 12, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(0, 20, 50, 50),  text("A"), channel("SG1_Env_Filters_A"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(50, 20, 50, 50),  text("D"), channel("SG1_Env_Filters_D"), range(0.02, 3, 2, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(100, 20, 50, 50),  text("S"), channel("SG1_Env_Filters_S"), range(0.02, .99, .99, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(150, 20, 50, 50),  text("R"), channel("SG1_Env_Filters_R"), range(0.02, 3, 12, 1, 0.001), textcolour(0,0,0)
+  }
+  groupbox bounds(500,145,200,55), $LAYER1_COLOR, text("FM Envelope (ENV4)"), fontcolour("black"){
+    ;label      bounds(400, 120, 190, 20), text("Filter Envelope"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    rslider    bounds(0, 20, 50, 50),  text("A"), channel("SG1_Env_Filters_A"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(50, 20, 50, 50),  text("D"), channel("SG1_Env_Filters_D"), range(0.02, 3, 2, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(100, 20, 50, 50),  text("S"), channel("SG1_Env_Filters_S"), range(0.02, .99, .99, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(150, 20, 50, 50),  text("R"), channel("SG1_Env_Filters_R"), range(0.02, 3, 12, 1, 0.001), textcolour(0,0,0)
+  }
+  image bounds(700,0,100,200), $LAYER1_COLOR, text("Keyboard Split"), fontcolour("black"){
+    ;label      bounds(400, 120, 190, 20), text("Filter Envelope"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    combobox   bounds(0, 0, 50, 20),channel("SG1_Keyboard_Split_HP_Note_Low"), items("none", "C0","D0","E0","F0","G0","A0","A0","C1","D1","E1","F1","G1","A1","B1","C2","D2","E2","F2","G2","A2","B2","C3","D3","E3","F3","G3","A3","B3","C4","D4","E4","F4","G4","A4","B4","C5","D5","E5","F5","G5","A5","B5","C6","D6","E6","F6","G6","A6","B6"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    combobox   bounds(50, 0, 50, 20),channel("SG1_Keyboard_Split_HP_Note_High")items("none","C0","D0","E0","F0","G0","A0","A0","C1","D1","E1","F1","G1","A1","B1","C2","D2","E2","F2","G2","A2","B2","C3","D3","E3","F3","G3","A3","B3","C4","D4","E4","F4","G4","A4","B4","C5","D5","E5","F5","G5","A5","B5","C6","D6","E6","F6","G6","A6","B6"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    rslider    bounds(0, 20, 30, 30),  text(""), channel("SG1_Keyboard_Split_HP_Velocity_Low"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(30, 20, 30, 30),  text(""), channel("SG1_Keyboard_Split_HP_Velocity_High"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(60, 20, 30, 30),  text(""), channel("SG1_Keyboard_Split_HP_Scale"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
+
+    combobox   bounds(0, 50, 50, 20),channel("SG1_Keyboard_Split_LP_Note_Low"), items("none", "C0","D0","E0","F0","G0","A0","A0","C1","D1","E1","F1","G1","A1","B1","C2","D2","E2","F2","G2","A2","B2","C3","D3","E3","F3","G3","A3","B3","C4","D4","E4","F4","G4","A4","B4","C5","D5","E5","F5","G5","A5","B5","C6","D6","E6","F6","G6","A6","B6"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    combobox   bounds(50, 50, 50, 20),channel("SG1_Keyboard_Split_LP_Note_High")items("none","C0","D0","E0","F0","G0","A0","A0","C1","D1","E1","F1","G1","A1","B1","C2","D2","E2","F2","G2","A2","B2","C3","D3","E3","F3","G3","A3","B3","C4","D4","E4","F4","G4","A4","B4","C5","D5","E5","F5","G5","A5","B5","C6","D6","E6","F6","G6","A6","B6"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    rslider    bounds(0, 70, 30, 30),  text(""), channel("SG1_Keyboard_Split_LP_Velocity_Low"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(30, 70, 30, 30),  text(""), channel("SG1_Keyboard_Split_LP_Velocity_High"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(60, 70, 30, 30),  text(""), channel("SG1_Keyboard_Split_LP_Scale"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
+
+    combobox   bounds(0, 100, 50, 20),channel("SG1_Keyboard_Split_RM_Note_Low"), items("none", "C0","D0","E0","F0","G0","A0","A0","C1","D1","E1","F1","G1","A1","B1","C2","D2","E2","F2","G2","A2","B2","C3","D3","E3","F3","G3","A3","B3","C4","D4","E4","F4","G4","A4","B4","C5","D5","E5","F5","G5","A5","B5","C6","D6","E6","F6","G6","A6","B6"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    combobox   bounds(50, 100, 50, 20),channel("SG1_Keyboard_Split_RM_Note_High")items("none","C0","D0","E0","F0","G0","A0","A0","C1","D1","E1","F1","G1","A1","B1","C2","D2","E2","F2","G2","A2","B2","C3","D3","E3","F3","G3","A3","B3","C4","D4","E4","F4","G4","A4","B4","C5","D5","E5","F5","G5","A5","B5","C6","D6","E6","F6","G6","A6","B6"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    rslider    bounds(0, 120, 30, 30),  text(""), channel("SG1_Keyboard_Split_RM_Velocity_Low"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(30, 120, 30, 30),  text(""), channel("SG1_Keyboard_Split_RM_Velocity_High"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(60, 120, 30, 30),  text(""), channel("SG1_Keyboard_Split_RM_Scale"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
+
+    
+    combobox   bounds(0, 150, 50, 20),channel("SG1_Keyboard_Split_FM_Note_Low"), items("none", "C0","D0","E0","F0","G0","A0","A0","C1","D1","E1","F1","G1","A1","B1","C2","D2","E2","F2","G2","A2","B2","C3","D3","E3","F3","G3","A3","B3","C4","D4","E4","F4","G4","A4","B4","C5","D5","E5","F5","G5","A5","B5","C6","D6","E6","F6","G6","A6","B6"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    combobox   bounds(50, 150, 50, 20),channel("SG1_Keyboard_Split_FM_Note_High")items("none","C0","D0","E0","F0","G0","A0","A0","C1","D1","E1","F1","G1","A1","B1","C2","D2","E2","F2","G2","A2","B2","C3","D3","E3","F3","G3","A3","B3","C4","D4","E4","F4","G4","A4","B4","C5","D5","E5","F5","G5","A5","B5","C6","D6","E6","F6","G6","A6","B6"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    rslider    bounds(0, 170, 30, 30),  text(""), channel("SG1_Keyboard_FM_Velocity_Low"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(30, 170, 30, 30),  text(""), channel("SG1_Keyboard_Split_FM_Velocity_High"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)  
+    rslider    bounds(60, 170, 30, 30),  text(""), channel("SG1_Keyboard_Split_FM_Scale"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
+
   }
   
 } 
-image bounds(0, 300, 800, 200), $LAYER2_COLOR ,channel("Layer2"), identchannel("ID_Layer2"), plant("layer2plant"){
 
-  groupbox bounds(0,0,200,200), $LAYER2_COLOR, text("Sound Generator 2"), fontcolour("black"){
+image bounds(0, 250, 800, 200), $LAYER1_COLOR ,channel("Layer2"), identchannel("ID_Layer2"), plant("layer2plant"){
+
+  groupbox bounds(0,0,300,200), $LAYER1_COLOR, text("Sound Generator 1"), fontcolour("black"), identchannel("ID_Sound_Generator_1"){
     ;label      bounds(0, 5, 200, 20),   text("Sound Generator 1"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
 
-    combobox   bounds(2, 25, 100, 25),  items("sine" , "saw", "square", "triangle"), channel("SG2_Wav"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-    rslider    bounds(100, 25, 50, 50), text("PWM"),channel("SG2_PWM"), range(0.01, 0.99, .01, 1, 0.001),identchannel("ID_SG2_PWM"), textcolour(0,0,0)
-    rslider    bounds(150, 25, 50, 50), text("Phase"), channel("SG2_Phase"), range(0.01, 0.99, .01, 1, 0.001), identchannel("ID_SG2_Phase")textcolour(0,0,0)
-    rslider    bounds(150, 70, 50, 50), text("Noise"), channel("SG2_Noise_Volume"), range(0.01, 0.99, .01, 1, 0.001), textcolour(0,0,0)
-
-    groupbox bounds(2,120,196,80), $LAYER2_COLOR, text("Amp Envelope"), fontcolour("black"){
+    combobox   bounds(2, 2, 90, 20),  items("none" , "saw", "square", "triangle"), channel("SG1_Wav"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+   
+    rslider    bounds(2, 20, 50, 50), text("Noise"), channel("SG1_Noise_Volume"), range(0.001, 0.99, .001, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(50, 20, 50, 50), text("Triangle"), channel("SG1_Triangle_Volume"), range(0.001, 0.99, .001, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(100, 20, 50, 50), text("SF2"), channel("SG1_SF2_Volume"), range(0.001, 0.99, .001, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(100, 70, 50, 50), text("Sub"), channel("SG1_Suboscilator_Volume"), range(0.001, 0.99, .001, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(2, 70, 50, 50),text("Octave"), channel("SG1_Octave"), range(0.1, 3, .01, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(50, 70, 50, 50),text("Fine"), channel("SG1_Fine"), range(0.1, 3, .01, 1, 0.001), textcolour(0,0,0)
+    
+    image bounds(150,22,148,50), $LAYER1_COLOR2 {
+      rslider    bounds(0, 0, 50, 50), text("Square"),channel("SG1_Square_Volume"), range(0.01, 0.99, .01, 1, 0.001),identchannel("ID_SG1_PWM"), textcolour(0,0,0)
+      rslider    bounds(50, 0, 50, 50), text("Phase"), channel("SG1_Square_Phase"), range(0.01, 0.99, .01, 1, 0.001), identchannel("ID_SG1_Phase")textcolour(0,0,0)
+      rslider    bounds(100, 0, 50, 50), text("PWM"),channel("SG1_Square_PWM"), range(0.01, 0.99, .01, 1, 0.001),identchannel("ID_SG1_PWM"), textcolour(0,0,0)
+    }
+    image bounds(150,72,148,50), $LAYER1_COLOR3 {
+      rslider    bounds(0, 0, 50, 50), text("Saw"),channel("SG1_Saw_Volume"), range(0.01, 0.99, .01, 1, 0.001),identchannel("ID_SG1_PWM"), textcolour(0,0,0)
+      rslider    bounds(50, 0, 50, 50), text("Super"),channel("SG1_Saw_Super"), range(0.01, 0.99, .01, 1, 0.001),identchannel("ID_SG1_PWM"), textcolour(0,0,0)
+      rslider    bounds(100, 0, 50, 50), text("Detune"),channel("SG1_Saw_Detune"), range(0.01, 0.99, .01, 1, 0.001),identchannel("ID_SG1_PWM"), textcolour(0,0,0)
+    }
+    
+    
+    groupbox bounds(2,120,194,74), $LAYER1_COLOR, text("Amp Envelope (ENV5)"), fontcolour("black"){
     ;label      bounds(0, 120, 190, 20), text("Amp Envelope"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-      rslider    bounds(0, 25, 50, 50),  text("A"), channel("SG2_Env_Amp_A"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
-      rslider    bounds(50, 25, 50, 50), text("D"), channel("SG2_Env_Amp_D"), range(0.02, 3, 2, 1, 0.001), textcolour(0,0,0)
-      rslider    bounds(100, 25, 50, 50),text("S"), channel("SG2_Env_Amp_S"), range(0.02, .99, .99, 1, 0.001), textcolour(0,0,0)
-      rslider    bounds(150, 25, 50, 50),text("R"), channel("SG2_Env_Amp_R"), range(0.1, 3, .01, 1, 0.001), textcolour(0,0,0)
+      rslider    bounds(0, 25, 50, 50),  text("A"), channel("SG1_Env_Amp_A"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
+      rslider    bounds(50, 25, 50, 50), text("D"), channel("SG1_Env_Amp_D"), range(0.02, 3, 2, 1, 0.001), textcolour(0,0,0)
+      rslider    bounds(100, 25, 50, 50),text("S"), channel("SG1_Env_Amp_S"), range(0.02, .99, .99, 1, 0.001), textcolour(0,0,0)
+      rslider    bounds(150, 25, 50, 50),text("R"), channel("SG1_Env_Amp_R"), range(0.1, 3, .01, 1, 0.001), textcolour(0,0,0)     
     }
+      rslider    bounds(200, 120, 50, 50),text("LFO1 Rate"), channel("SG1_LFO1_Rate"), range(0.1, 3, .01, 1, 0.001), textcolour(0,0,0)     
+      combobox   bounds(198, 170, 50, 20),  items("Noise" , "Vol", "SF2", "Square", "Phase","PWM","Octave","Fine","Sub","Saw","Super","Detune"), channel("SG1_LFO1_Destination"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+      rslider    bounds(250, 120, 50, 50),text("LFO2 Rate"), channel("SG1_LFO2_Rate"), range(0.1, 3, .01, 1, 0.001), textcolour(0,0,0)     
+      combobox   bounds(248, 170, 50, 20),  items("Noise" , "Vol", "SF2", "Square", "Phase","PWM","Octave","Fine","Sub","Saw","Super","Detune"), channel("SG1_LFO2_Destination"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+
   }
 
-  groupbox bounds(200,0,200,200), $LAYER2_COLOR, text("RM"), fontcolour("black"){
+  groupbox bounds(300,0,200,200), $LAYER1_COLOR, text("RM + FM"), fontcolour("black"){
     ;label      bounds(210, 5, 190, 20), text("AM"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-    rslider    bounds(0, 25, 50, 50), text("Freq"), channel("SG2_RM_Frequency"), range(1, 8000, 1, .5, 1), textcolour(0,0,0)
-    rslider    bounds(50, 25, 50, 50), text("Vol"), channel("SG2_RM_Volume"), range(0.001, 1, 0.01, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(0, 25, 50, 50), text("Freq"), channel("SG1_RM_Frequency"), range(1, 8000, 1, .5, 1), textcolour(0,0,0)
+    rslider    bounds(50, 25, 50, 50), text("Vol"), channel("SG1_RM_Volume"), range(0.001, 1, 0.01, 1, 0.001), textcolour(0,0,0)
 
-    combobox   bounds(4, 75, 96, 25),items("ring" , "am", "chaos", "frozen"), channel("SG2_AM_Type"),$LAYER2_COLOR, fontcolour(0, 0, 0, 255)
-    label      bounds(4, 105, 50, 11),text("AM Type"), $LAYER2_COLOR, fontcolour(0, 0, 0, 255)
-    combobox   bounds(100, 75, 98, 25),items("sine" , "saw", "square", "triangle"), channel("SG2_AM_Wav"),$LAYER2_COLOR, fontcolour(0, 0, 0, 255)
-    label      bounds(100, 105, 50, 11),text("AM Wav"), $LAYER2_COLOR, fontcolour(0, 0, 0, 255)
+    combobox   bounds(4, 70, 50, 20),items("ring" , "am", "chaos", "frozen"), channel("SG1_AM_Type"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    label      bounds(4, 90, 50, 11),text("AM Type"), $LAYER1_COLOR, fontcolour(0, 0, 0, 255)
+    combobox   bounds(50, 70, 50, 20),items("sine" , "saw", "square", "triangle"), channel("SG1_AM_Wav"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    label      bounds(50, 90, 50, 11),text("AM Wav"), $LAYER1_COLOR, fontcolour(0, 0, 0, 255)
+    combobox   bounds(4, 100, 100, 20),items("OP1->OP2->SF2", "OP1->OP2->Square","OP1->OP2->Saw", "OP1->OP2->Sub", "OP1->OP2->All except Sub","OP1->OP2->All"), channel("SG1_FM_Algorithm"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
 
+    rslider    bounds(100, 25, 50, 50), text("OP1"), channel("SG1_FM_OP1_Volume"), range(1, 8000, 1, .5, 1), textcolour(0,0,0)
+    rslider    bounds(100, 75, 50, 50), text("OP1 Freq"), channel("SG1_FM_OP1_Frequency"), range(1, 8000, 1, .5, 1), textcolour(0,0,0)
+    rslider    bounds(150, 25, 50, 50), text("OP2"), channel("SG1_FM_OP2_volume"), range(1, 8000, 1, .5, 1), textcolour(0,0,0)
+    rslider    bounds(150, 75, 50, 50), text("OP2 Freq"), channel("SG1_FM_OP2_Frequency"), range(1, 8000, 1, .5, 1), textcolour(0,0,0)
+    
     ;label      bounds(0, 120, 190, 20), text("Ring Amp Envelope"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-    groupbox bounds(2,120,196,78), $LAYER2_COLOR, text("RM_Envelope"), fontcolour("black"){
-      rslider    bounds(0, 30, 50, 50),  text("A"), channel("SG2_Env_RM_A"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
-      rslider    bounds(50, 30, 50, 50),  text("D"), channel("SG2_Env_RM_D"), range(0.02, 3, 2, 1, 0.001), textcolour(0,0,0)
-      rslider    bounds(100, 30, 50, 50),  text("S"), channel("SG2_Env_RM_S"), range(0.02, .99, .99, 1, 0.001), textcolour(0,0,0)
-      rslider    bounds(150, 30, 50, 50),  text("R"), channel("SG2_Env_RM_R"), range(0.02, 3, 12, 1, 0.001), textcolour(0,0,0)
+    groupbox bounds(2,130,195,70), $LAYER1_COLOR, text("RM Envelope (ENV6)"), fontcolour("black"){
+      rslider    bounds(0, 20, 50, 50),  text("A"), channel("SG1_Env_RM_A"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
+      rslider    bounds(50, 20, 50, 50),  text("D"), channel("SG1_Env_RM_D"), range(0.02, 3, 2, 1, 0.001), textcolour(0,0,0)
+      rslider    bounds(100, 20, 50, 50),  text("S"), channel("SG1_Env_RM_S"), range(0.02, .99, .99, 1, 0.001), textcolour(0,0,0)
+      rslider    bounds(150, 20, 50, 50),  text("R"), channel("SG1_Env_RM_R"), range(0.02, 3, 12, 1, 0.001), textcolour(0,0,0)
     }
   }
 
-  groupbox bounds(400,0,100,100), $LAYER2_COLOR, text("Filter HP"), fontcolour("black"){
+  groupbox bounds(500,0,100,75s), $LAYER1_COLOR, text("Filter HP"), fontcolour("black"){
     ;label      bounds(410, 5, 90, 20),  text("Filter HP"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-    rslider    bounds(0, 25, 50, 50), text("Freq"), channel("SG2_High_Pass_Frequency"), range(100, 16000, 100, 1, 0.001), textcolour(0,0,0)
-    rslider    bounds(50, 25, 50, 50), text("Reas"), channel("SG2_High_Pass_Reasonance"), range(1, 200, 1, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(0, 25, 50, 50), text("Freq"), channel("SG1_High_Pass_Frequency"), range(100, 16000, 100, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(50, 25, 50, 50), text("Reas"), channel("SG1_High_Pass_Reasonance"), range(1, 200, 1, 1, 0.001), textcolour(0,0,0)
   }
-  groupbox bounds(500,0,100,100), $LAYER2_COLOR, text("Filter LP"), fontcolour("black"){
+  groupbox bounds(600,0,100,75), $LAYER1_COLOR, text("Filter LP"), fontcolour("black"){
     ;label      bounds(0, 5, 90, 20),  text("Filter LP"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-    rslider    bounds(0, 25, 50, 50), text("Freq"), channel("SG2_Low_Pass_Frequency"), range(100, 16000, 16000, 1, 0.001), textcolour(0,0,0)
-    rslider    bounds(50, 25, 50, 50), text("Reas"), channel("SG2_Low_Pass_Reasonance"), range(0.01, 1, 0, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(0, 25, 50, 50), text("Freq"), channel("SG1_Low_Pass_Frequency"), range(100, 16000, 16000, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(50, 25, 50, 50), text("Reas"), channel("SG1_Low_Pass_Reasonance"), range(0.01, 1, 0, 1, 0.001), textcolour(0,0,0)
   }
-  groupbox bounds(400,100,200,100), $LAYER2_COLOR, text("Filter Envelope"), fontcolour("black"){
+  groupbox bounds(500,75,200,70), $LAYER1_COLOR, text("Filters Envelope (ENV7)"), fontcolour("black"){
     ;label      bounds(400, 120, 190, 20), text("Filter Envelope"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-    rslider    bounds(0, 30, 50, 50),  text("A"), channel("SG2_Env_Filters_A"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
-    rslider    bounds(50, 30, 50, 50),  text("D"), channel("SG2_Env_Filters_D"), range(0.02, 3, 2, 1, 0.001), textcolour(0,0,0)
-    rslider    bounds(100, 30, 50, 50),  text("S"), channel("SG2_Env_Filters_S"), range(0.02, .99, .99, 1, 0.001), textcolour(0,0,0)
-    rslider    bounds(150, 30, 50, 50),  text("R"), channel("SG2_Env_Filters_R"), range(0.02, 3, 12, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(0, 20, 50, 50),  text("A"), channel("SG1_Env_Filters_A"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(50, 20, 50, 50),  text("D"), channel("SG1_Env_Filters_D"), range(0.02, 3, 2, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(100, 20, 50, 50),  text("S"), channel("SG1_Env_Filters_S"), range(0.02, .99, .99, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(150, 20, 50, 50),  text("R"), channel("SG1_Env_Filters_R"), range(0.02, 3, 12, 1, 0.001), textcolour(0,0,0)
   }
+  groupbox bounds(500,145,200,55), $LAYER1_COLOR, text("FM Envelope (ENV8)"), fontcolour("black"){
+    ;label      bounds(400, 120, 190, 20), text("Filter Envelope"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    rslider    bounds(0, 20, 50, 50),  text("A"), channel("SG1_Env_Filters_A"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(50, 20, 50, 50),  text("D"), channel("SG1_Env_Filters_D"), range(0.02, 3, 2, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(100, 20, 50, 50),  text("S"), channel("SG1_Env_Filters_S"), range(0.02, .99, .99, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(150, 20, 50, 50),  text("R"), channel("SG1_Env_Filters_R"), range(0.02, 3, 12, 1, 0.001), textcolour(0,0,0)
+  }
+  image bounds(700,0,100,200), $LAYER1_COLOR, text("Keyboard Split"), fontcolour("black"){
+    ;label      bounds(400, 120, 190, 20), text("Filter Envelope"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    combobox   bounds(0, 0, 50, 20),channel("SG1_Keyboard_Split_HP_Note_Low"), items("none", "C0","D0","E0","F0","G0","A0","A0","C1","D1","E1","F1","G1","A1","B1","C2","D2","E2","F2","G2","A2","B2","C3","D3","E3","F3","G3","A3","B3","C4","D4","E4","F4","G4","A4","B4","C5","D5","E5","F5","G5","A5","B5","C6","D6","E6","F6","G6","A6","B6"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    combobox   bounds(50, 0, 50, 20),channel("SG1_Keyboard_Split_HP_Note_High")items("none","C0","D0","E0","F0","G0","A0","A0","C1","D1","E1","F1","G1","A1","B1","C2","D2","E2","F2","G2","A2","B2","C3","D3","E3","F3","G3","A3","B3","C4","D4","E4","F4","G4","A4","B4","C5","D5","E5","F5","G5","A5","B5","C6","D6","E6","F6","G6","A6","B6"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    rslider    bounds(0, 20, 30, 30),  text(""), channel("SG1_Keyboard_Split_HP_Velocity_Low"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(30, 20, 30, 30),  text(""), channel("SG1_Keyboard_Split_HP_Velocity_High"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(60, 20, 30, 30),  text(""), channel("SG1_Keyboard_Split_HP_Scale"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
 
-}
+    combobox   bounds(0, 50, 50, 20),channel("SG1_Keyboard_Split_LP_Note_Low"), items("none", "C0","D0","E0","F0","G0","A0","A0","C1","D1","E1","F1","G1","A1","B1","C2","D2","E2","F2","G2","A2","B2","C3","D3","E3","F3","G3","A3","B3","C4","D4","E4","F4","G4","A4","B4","C5","D5","E5","F5","G5","A5","B5","C6","D6","E6","F6","G6","A6","B6"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    combobox   bounds(50, 50, 50, 20),channel("SG1_Keyboard_Split_LP_Note_High")items("none","C0","D0","E0","F0","G0","A0","A0","C1","D1","E1","F1","G1","A1","B1","C2","D2","E2","F2","G2","A2","B2","C3","D3","E3","F3","G3","A3","B3","C4","D4","E4","F4","G4","A4","B4","C5","D5","E5","F5","G5","A5","B5","C6","D6","E6","F6","G6","A6","B6"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    rslider    bounds(0, 70, 30, 30),  text(""), channel("SG1_Keyboard_Split_LP_Velocity_Low"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(30, 70, 30, 30),  text(""), channel("SG1_Keyboard_Split_LP_Velocity_High"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(60, 70, 30, 30),  text(""), channel("SG1_Keyboard_Split_LP_Scale"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
 
-image bounds(0, 500, 800, 100) colour(120, 69, 69, 255),plant("Master"){
-label      bounds(0, 0, 190, 20), text("General"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    combobox   bounds(0, 100, 50, 20),channel("SG1_Keyboard_Split_RM_Note_Low"), items("none", "C0","D0","E0","F0","G0","A0","A0","C1","D1","E1","F1","G1","A1","B1","C2","D2","E2","F2","G2","A2","B2","C3","D3","E3","F3","G3","A3","B3","C4","D4","E4","F4","G4","A4","B4","C5","D5","E5","F5","G5","A5","B5","C6","D6","E6","F6","G6","A6","B6"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    combobox   bounds(50, 100, 50, 20),channel("SG1_Keyboard_Split_RM_Note_High")items("none","C0","D0","E0","F0","G0","A0","A0","C1","D1","E1","F1","G1","A1","B1","C2","D2","E2","F2","G2","A2","B2","C3","D3","E3","F3","G3","A3","B3","C4","D4","E4","F4","G4","A4","B4","C5","D5","E5","F5","G5","A5","B5","C6","D6","E6","F6","G6","A6","B6"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    rslider    bounds(0, 120, 30, 30),  text(""), channel("SG1_Keyboard_Split_RM_Velocity_Low"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(30, 120, 30, 30),  text(""), channel("SG1_Keyboard_Split_RM_Velocity_High"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(60, 120, 30, 30),  text(""), channel("SG1_Keyboard_Split_RM_Scale"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
+
+    
+    combobox   bounds(0, 150, 50, 20),channel("SG1_Keyboard_Split_FM_Note_Low"), items("none", "C0","D0","E0","F0","G0","A0","A0","C1","D1","E1","F1","G1","A1","B1","C2","D2","E2","F2","G2","A2","B2","C3","D3","E3","F3","G3","A3","B3","C4","D4","E4","F4","G4","A4","B4","C5","D5","E5","F5","G5","A5","B5","C6","D6","E6","F6","G6","A6","B6"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    combobox   bounds(50, 150, 50, 20),channel("SG1_Keyboard_Split_FM_Note_High")items("none","C0","D0","E0","F0","G0","A0","A0","C1","D1","E1","F1","G1","A1","B1","C2","D2","E2","F2","G2","A2","B2","C3","D3","E3","F3","G3","A3","B3","C4","D4","E4","F4","G4","A4","B4","C5","D5","E5","F5","G5","A5","B5","C6","D6","E6","F6","G6","A6","B6"),colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+    rslider    bounds(0, 170, 30, 30),  text(""), channel("SG1_Keyboard_FM_Velocity_Low"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
+    rslider    bounds(30, 170, 30, 30),  text(""), channel("SG1_Keyboard_Split_FM_Velocity_High"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)  
+    rslider    bounds(60, 170, 30, 30),  text(""), channel("SG1_Keyboard_Split_FM_Scale"), range(0.001, 3, .01, 1, 0.001), textcolour(0,0,0)
+
+  }
+  
+} 
+
+image bounds(0, 450, 800, 250) colour(120, 69, 69, 255),plant("Master"){
+label      bounds(0, 0, 90, 20), text("General"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
 rslider    bounds(0, 25, 50, 50),  text("Mix"), channel("SGMix"), range(0.0, 1, .5, 1, .01), textcolour(0,0,0)
 ;rslider    bounds(50, 25, 50, 50), trackerinsideradius(0.6), text("SG2"), channel("SG2 Amp"), range(0.0, .5, 0, 1, 0.001), textcolour(0,0,0)
 
-label      bounds(200, 0, 190, 20), text("Chorus"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+label      bounds(100, 0, 150, 20), text("Chorus"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
 ;rslider    bounds(0, 25, 50, 50), trackerinsideradius(0.6), text("Mix"), channel("SGMix"), range(0.0, 1, .5, 1, .01), textcolour(0,0,0)
 ;rslider    bounds(50, 25, 50, 50), trackerinsideradius(0.6), text("SG2"), channel("SG2 Amp"), range(0.0, .5, 0, 1, 0.001), textcolour(0,0,0)
 
 
-label      bounds(400, 0, 190, 20), text("Reverb"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
-rslider    bounds(400, 25, 50, 50),  text("Size"), channel("Master_Reverb_Size"), range(0.0, 1, 0, .5, .01), textcolour(0,0,0)
-rslider    bounds(450, 25, 50, 50),  text("Damp"), channel("Master_Reverb_Damp"), range(0.0, 1, 0, .5, .01), textcolour(0,0,0)
-rslider    bounds(500, 25, 50, 50),  text("Mix"), channel("Master_Reverb_Mix"), range(0.0, 1, 0, .5, .01), textcolour(0,0,0)
-rslider    bounds(550, 25, 50, 50),  text("Level"), channel("Master_Reverb_Level"), range(0.0, 1, 0, .5, .01), textcolour(0,0,0)
+label      bounds(252, 0, 190, 20), text("Reverb"), colour(60, 60, 120, 122), fontcolour(0, 0, 0, 255)
+rslider    bounds(250, 25, 50, 50),  text("Size"), channel("Master_Reverb_Size"), range(0.0, 1, 0, .5, .01), textcolour(0,0,0)
+rslider    bounds(300, 25, 50, 50),  text("Damp"), channel("Master_Reverb_Damp"), range(0.0, 1, 0, .5, .01), textcolour(0,0,0)
+rslider    bounds(350, 25, 50, 50),  text("Mix"), channel("Master_Reverb_Mix"), range(0.0, 1, 0, .5, .01), textcolour(0,0,0)
+rslider    bounds(400, 25, 50, 50),  text("Level"), channel("Master_Reverb_Level"), range(0.0, 1, 0, .5, .01), textcolour(0,0,0)
 
+
+signaldisplay bounds(0,97,500,150), backgroundcolour("black")
+groupbox bounds(500,0,300,250), text("Mod Matrix") 
 
 }
 
 ;gentable bounds(600, 100, 200, 200), tablenumber(1), identchannel("table"), active(1), samplerange(0,4096);, amprange(-0.5,1,-1,0.1) 
 
-combobox bounds(0, 30, 100, 25), populate("*.snaps")
-filebutton bounds(116, 30, 60, 25), text("Save"), populate("*.snaps"), mode("snapshot")
-button bounds(20, 104, 150, 14), value(1), colour:1(0, 155, 0, 255), colour:0(155,0,0,255), channel("SG1_on_off"),identchannel("ID_SG1_on_off"), text("Sound Generator 1"), fontcolour:0("black"), fontcolour:1("black")
+
 
 </Cabbage>
 <CsoundSynthesizer>
@@ -180,8 +327,8 @@ giWave ftgen 1, 0, 4096, 10, 1, 1, 1, 1
 ; || SOUND GENERATOR 1 ||
 ; =======================
 
-;cpuprc 1,99
-;maxalloc 1,128
+;cpuprc 1,90
+maxalloc 1,32
 instr 1
   
 ; -----------------------
@@ -272,6 +419,7 @@ instr 1
   aSG1FLp moogladder aSG1,kSG1FilterLpF * kSG1EnvFilter,kSG1FilterLpR
   aSG1FHp bqrez aSG1FLp, kSG1FilterHpF * kSG1EnvFilter, kSG1FilterHpR, 1
   aSG1Output balance aSG1FHp, aSG1
+  aSG1Output = aSG1Output * 0.5
   
   
 ; =======================
@@ -348,7 +496,7 @@ instr 1
   
   ; apply ring modulation
   if kSG2RMVolume > 0.001 then
-    aSG2RMsound = (aSG2RM * aSG2sine)
+    aSG2RMsound = (aSG2RM * aSG2Sine)
     aSG2 = (aSG2Sine*(1-kSG2RMVolume))+aSG2RMsound
   else
     aSG2 = aSG2Sine 
@@ -418,49 +566,13 @@ instr 1
     outs aMOutL, aMOutR
   endif
   
- 
-  ;chnset	"tablenumber(2)", "table"	; update table display
-  
-endin
+endin 
 
-instr 2
-  if metro(4) == 1 then
-    event "i", "updateGUI", 0, 1
-  endif
-endin
-
-instr updateGUI
   
-  iSG1wavStr chnget "SG1_Wav"
-  iSG1onoff chnget "SG1_on_off"
-  ;chnset "displaytype('waveform')","wavdisplay"
-  if iSG1onoff == 0 then
-    chnset "active(0)", "ID_Layer1"
-    chnset "active(1)", "ID_SG1_on_off"
-    ;chnset "active(0)", "ID_Sound_Generator_1"
-  else
-    chnset "active(1)", "ID_Layer1"
-    ;chnset "active(1)", "ID_Sound_Generator_1"
-  endif
-  if iSG1wavStr == 1 then      ;sine
-    chnset "active(0)", "ID_SG1_PWM"
-    chnset "active(0)", "ID_SG1_Phase"
-  elseif iSG1wavStr == 2 then  ;saw
-    chnset "active(0)", "ID_SG1_PWM"
-    chnset "active(0)", "ID_SG1_Phase"
-  elseif iSG1wavStr == 3 then  ;square
-    chnset "active(1)", "ID_SG1_PWM"
-    chnset "active(1)", "ID_SG1_Phase"
-  elseif iSG1wavStr == 4 then  ;triangle
-    chnset "active(0)", "ID_SG1_PWM"
-    chnset "active(0)", "ID_SG1_Phase"    
-  endif
-endin
+
 </CsInstruments>
 <CsScore>
 ;causes Csound to run for about 7000 years...
 ;f0 z
-i1 0 z
-i2 0 z
 </CsScore>
 </CsoundSynthesizer>
